@@ -425,6 +425,91 @@
       ],
       "color": "#f8f8f8",
       "bytes": 367309
+    },
+    {
+      "id": "heaven-on-earth-camp-2022-11-front-row",
+      "file": "heaven-on-earth-camp-2022/11-front-row.jpg",
+      "alt": "Pastor Eric seated in the front row in a turquoise patterned shirt, listening during a session",
+      "caption": "",
+      "album": "Heaven on Earth Camp 2022",
+      "focus": 0.3,
+      "w": 2000,
+      "h": 1333,
+      "widths": [
+        400,
+        1000,
+        1800
+      ],
+      "color": "#180808",
+      "bytes": 367549
+    },
+    {
+      "id": "heaven-on-earth-camp-2022-12-cake",
+      "file": "heaven-on-earth-camp-2022/12-cake.jpg",
+      "alt": "Pastor Eric in white, taking a bite of cake in front of a choir dressed in white",
+      "caption": "",
+      "album": "Heaven on Earth Camp 2022",
+      "focus": 0.35,
+      "w": 2000,
+      "h": 1333,
+      "widths": [
+        400,
+        1000,
+        1800
+      ],
+      "color": "#88c8f8",
+      "bytes": 360421
+    },
+    {
+      "id": "heaven-on-earth-camp-2022-13-carving-with-guest",
+      "file": "heaven-on-earth-camp-2022/13-carving-with-guest.jpg",
+      "alt": "Pastor Eric in white smiling beside a woman in a navy blazer, under a large carved wooden panel",
+      "caption": "",
+      "album": "Heaven on Earth Camp 2022",
+      "focus": 0.3,
+      "w": 2000,
+      "h": 1333,
+      "widths": [
+        400,
+        1000,
+        1800
+      ],
+      "color": "#f8f8f8",
+      "bytes": 497074
+    },
+    {
+      "id": "heaven-on-earth-camp-2022-14-carving-in-white",
+      "file": "heaven-on-earth-camp-2022/14-carving-in-white.jpg",
+      "alt": "Pastor Eric and a smiling young woman, both dressed in white, standing beneath a carved wooden panel",
+      "caption": "",
+      "album": "Heaven on Earth Camp 2022",
+      "focus": 0.25,
+      "w": 1333,
+      "h": 2000,
+      "widths": [
+        267,
+        667,
+        1200
+      ],
+      "color": "#f8f8f8",
+      "bytes": 344535
+    },
+    {
+      "id": "heaven-on-earth-camp-2022-15-hand-raised",
+      "file": "heaven-on-earth-camp-2022/15-hand-raised.jpg",
+      "alt": "Pastor Eric raising one hand as he speaks into a microphone, in a turquoise tropical-print shirt",
+      "caption": "",
+      "album": "Heaven on Earth Camp 2022",
+      "focus": 0.3,
+      "w": 1333,
+      "h": 2000,
+      "widths": [
+        267,
+        667,
+        1200
+      ],
+      "color": "#08f8f8",
+      "bytes": 347983
     }
   ]
 }
