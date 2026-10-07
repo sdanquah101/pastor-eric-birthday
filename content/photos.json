@@ -714,6 +714,74 @@
       ],
       "color": "#f85848",
       "bytes": 473057
+    },
+    {
+      "id": "giya-2025-18-gesturing-slides",
+      "file": "giya-2025/18-gesturing-slides.jpg",
+      "alt": "Pastor Eric speaking with both hands open beside the lectern and a slide screen at the GIYA Conference 2025",
+      "caption": "",
+      "album": "GIYA Conference 2025",
+      "focus": 0.3,
+      "w": 1333,
+      "h": 2000,
+      "widths": [
+        267,
+        667,
+        1200
+      ],
+      "color": "#f8f8f8",
+      "bytes": 454705
+    },
+    {
+      "id": "giya-2025-19-hand-raised",
+      "file": "giya-2025/19-hand-raised.jpg",
+      "alt": "Pastor Eric raising one hand as he speaks on stage in front of the orange GIYA Conference 2025 banner",
+      "caption": "",
+      "album": "GIYA Conference 2025",
+      "focus": 0.3,
+      "w": 1333,
+      "h": 2000,
+      "widths": [
+        267,
+        667,
+        1200
+      ],
+      "color": "#f8f8f8",
+      "bytes": 409653
+    },
+    {
+      "id": "giya-2025-20-smiling-in-seats",
+      "file": "giya-2025/20-smiling-in-seats.jpg",
+      "alt": "Pastor Eric smiling warmly, chin resting on his hand, seated in the red and blue auditorium seats",
+      "caption": "",
+      "album": "GIYA Conference 2025",
+      "focus": 0.35,
+      "w": 2000,
+      "h": 1333,
+      "widths": [
+        400,
+        1000,
+        1800
+      ],
+      "color": "#e8d8d8",
+      "bytes": 455987
+    },
+    {
+      "id": "giya-2025-21-mic-from-audience",
+      "file": "giya-2025/21-mic-from-audience.jpg",
+      "alt": "Pastor Eric smiling as he speaks into a handheld microphone from his seat in the audience, beside a man in glasses",
+      "caption": "",
+      "album": "GIYA Conference 2025",
+      "focus": 0.4,
+      "w": 2000,
+      "h": 1333,
+      "widths": [
+        400,
+        1000,
+        1800
+      ],
+      "color": "#f80818",
+      "bytes": 350644
     }
   ]
 }
