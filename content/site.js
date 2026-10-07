@@ -38,17 +38,16 @@ export default {
   },
 
   bio: [
-    "Pastor Eric Obeng Kwakye is the Executive Director of Phanerosis Network International (PHANET), a ministry built on a single conviction: that what God has placed in a person is meant to be made visible.",
-    "[Add a paragraph on his calling and early ministry: where he started, when, and what drew him to this work.]",
-    "[Add a paragraph on his work with young people, students and the PHANET boards, and the outreaches he has led in Ghana and beyond.]",
-    "[Add a paragraph on his family and on the things those closest to him know him for.]",
+    "Ps. Eric Obeng Kwakye is a father, mentor, life coach and pastor to the thousands of phaneteers who have passed through the network.",
+    "He has pursued excellence in everything he puts his hand to, and he has taught many of us to do the same. As Executive Director of Phanerosis Network International, he has given himself to raising young people who know God and do their work well, in the lecture hall, on the stage and in every room they walk into.",
+    "Many of us first heard from him that God is interested in our academics, and we have watched him live what he teaches. Through camps, conferences, counsel and countless conversations, he has helped a generation find its feet, its voice and its calling.",
+    "Today we celebrate him: for the example he has set, for the lives he has built up, and for the many more years of fruitful ministry ahead. Happy birthday, Ps. Eric.",
   ],
 
   // Short facts shown beside the bio. Remove any you don't need.
   facts: [
     { term: "Role", detail: "Executive Director, Phanerosis Network International" },
-    { term: "Calling", detail: "[Pastor, teacher, mentor — edit as appropriate]" },
-    { term: "Based in", detail: "[City, Ghana]" },
+    { term: "Calling", detail: "Father, mentor, life coach and pastor" },
   ],
 
   // Opening sequence: four photos weave together, then become the final portrait.
@@ -66,13 +65,13 @@ export default {
 
   giving: {
     heading: "Send a birthday gift",
-    text: "Gifts are received securely through Paystack by mobile money or card. [State who receives the gifts and how they will be used.]",
+    text: "Send Ps. Eric a birthday blessing from the PHANET family. Gifts are received securely through Paystack by mobile money or card.",
     currency: "GHS",
     presets: [50, 100, 200, 500, 1000],
     defaultAmount: 200,
     // Your Paystack PUBLIC key (pk_live_… or pk_test_…). Safe to put here.
     // Optional if you set PAYSTACK_PUBLIC_KEY in Vercel instead.
-    publicKey: "",
+    publicKey: "pk_live_24444d9f7c60d06000f3ab6139f020b2d6e2dbd5",
   },
 
   relations: ["Family", "PHANET", "Church", "Friend", "Colleague", "Mentee", "Other"],
