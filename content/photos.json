@@ -255,6 +255,91 @@
       ],
       "color": "#f88838",
       "bytes": 502405
+    },
+    {
+      "id": "heaven-on-earth-camp-2022-01-with-guest",
+      "file": "heaven-on-earth-camp-2022/01-with-guest.jpg",
+      "alt": "Pastor Eric in a two-tone blue outfit, smiling beside a woman in a bright kente-print dress in front of the stage",
+      "caption": "",
+      "album": "Heaven on Earth Camp 2022",
+      "focus": 0.25,
+      "w": 1333,
+      "h": 2000,
+      "widths": [
+        267,
+        667,
+        1200
+      ],
+      "color": "#f8f8f8",
+      "bytes": 408392
+    },
+    {
+      "id": "heaven-on-earth-camp-2022-02-singing",
+      "file": "heaven-on-earth-camp-2022/02-singing.jpg",
+      "alt": "Pastor Eric singing into a microphone with his eyes closed as the audience watches, red curtains behind",
+      "caption": "",
+      "album": "Heaven on Earth Camp 2022",
+      "focus": 0.35,
+      "w": 2000,
+      "h": 1333,
+      "widths": [
+        400,
+        1000,
+        1800
+      ],
+      "color": "#f8f8f8",
+      "bytes": 351126
+    },
+    {
+      "id": "heaven-on-earth-camp-2022-03-smiling-mic",
+      "file": "heaven-on-earth-camp-2022/03-smiling-mic.jpg",
+      "alt": "Pastor Eric smiling and holding a microphone in front of curtains lit in blue, pink and green",
+      "caption": "",
+      "album": "Heaven on Earth Camp 2022",
+      "focus": 0.4,
+      "w": 2000,
+      "h": 1333,
+      "widths": [
+        400,
+        1000,
+        1800
+      ],
+      "color": "#a8b8d8",
+      "bytes": 473712
+    },
+    {
+      "id": "heaven-on-earth-camp-2022-04-preaching-flags",
+      "file": "heaven-on-earth-camp-2022/04-preaching-flags.jpg",
+      "alt": "Pastor Eric preaching and pointing down, beside the flags of Ghana, Nigeria and Spain and the PHANET lectern",
+      "caption": "",
+      "album": "Heaven on Earth Camp 2022",
+      "focus": 0.3,
+      "w": 2000,
+      "h": 1333,
+      "widths": [
+        400,
+        1000,
+        1800
+      ],
+      "color": "#a8d8f8",
+      "bytes": 470290
+    },
+    {
+      "id": "heaven-on-earth-camp-2022-05-phanet-lectern",
+      "file": "heaven-on-earth-camp-2022/05-phanet-lectern.jpg",
+      "alt": "Pastor Eric preaching at the PHANET lectern in front of the stage at Heaven on Earth Camp 2022",
+      "caption": "",
+      "album": "Heaven on Earth Camp 2022",
+      "focus": 0.45,
+      "w": 2000,
+      "h": 1333,
+      "widths": [
+        400,
+        1000,
+        1800
+      ],
+      "color": "#c8d8f8",
+      "bytes": 508353
     }
   ]
 }
