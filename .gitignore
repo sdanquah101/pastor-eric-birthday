@@ -6,3 +6,4 @@ node_modules
 # The web-sized copies in photos/web are what the site uses, and those are committed.
 photos/originals/*
 !photos/originals/README.md
+.neon
