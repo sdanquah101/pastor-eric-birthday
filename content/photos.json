@@ -629,6 +629,91 @@
       ],
       "color": "#f87868",
       "bytes": 493351
+    },
+    {
+      "id": "giya-2025-13-conversation-blue-dress",
+      "file": "giya-2025/13-conversation-blue-dress.jpg",
+      "alt": "Pastor Eric in a checked blazer listening closely to a young woman in a blue dress in the conference hall foyer",
+      "caption": "",
+      "album": "GIYA Conference 2025",
+      "focus": 0.3,
+      "w": 2000,
+      "h": 1333,
+      "widths": [
+        400,
+        1000,
+        1800
+      ],
+      "color": "#f8e8e8",
+      "bytes": 394114
+    },
+    {
+      "id": "giya-2025-14-outdoors-with-student",
+      "file": "giya-2025/14-outdoors-with-student.jpg",
+      "alt": "Pastor Eric smiling with his arm around a young woman in a white GIYA T-shirt outside the conference building",
+      "caption": "",
+      "album": "GIYA Conference 2025",
+      "focus": 0.25,
+      "w": 2000,
+      "h": 1333,
+      "widths": [
+        400,
+        1000,
+        1800
+      ],
+      "color": "#e8c8a8",
+      "bytes": 391609
+    },
+    {
+      "id": "giya-2025-15-outdoors-conversation",
+      "file": "giya-2025/15-outdoors-conversation.jpg",
+      "alt": "Pastor Eric in a black GIYA T-shirt talking with a young woman in a floral top outside, as other attendees gather behind",
+      "caption": "",
+      "album": "GIYA Conference 2025",
+      "focus": 0.25,
+      "w": 2000,
+      "h": 1333,
+      "widths": [
+        400,
+        1000,
+        1800
+      ],
+      "color": "#e8c8b8",
+      "bytes": 427090
+    },
+    {
+      "id": "giya-2025-16-backdrop-two-women",
+      "file": "giya-2025/16-backdrop-two-women.jpg",
+      "alt": "Pastor Eric smiling between two women in glasses, one in a pink dress and one in a rust dress, at the GIYA backdrop",
+      "caption": "",
+      "album": "GIYA Conference 2025",
+      "focus": 0.25,
+      "w": 1333,
+      "h": 2000,
+      "widths": [
+        267,
+        667,
+        1200
+      ],
+      "color": "#f86858",
+      "bytes": 445957
+    },
+    {
+      "id": "giya-2025-17-backdrop-giya-tee",
+      "file": "giya-2025/17-backdrop-giya-tee.jpg",
+      "alt": "Pastor Eric with his arm around a young woman, both in black GIYA T-shirts, in front of the GIYA Conference 2025 backdrop",
+      "caption": "",
+      "album": "GIYA Conference 2025",
+      "focus": 0.25,
+      "w": 1333,
+      "h": 2000,
+      "widths": [
+        267,
+        667,
+        1200
+      ],
+      "color": "#f85848",
+      "bytes": 473057
     }
   ]
 }
