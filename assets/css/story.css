@@ -1,0 +1,46 @@
+/* ================= HIS STORY ================= */
+.meaning {
+  padding: clamp(40px, 7vw, 100px) var(--pad);
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px 48px; align-items: flex-end;
+  border-bottom: 1px solid var(--line);
+}
+.meaning__word {
+  margin: 0; font-weight: 800; font-variation-settings: "opsz" 96, "wdth" 78;
+  font-size: clamp(52px, 10vw, 168px); line-height: .85; letter-spacing: -.02em; color: var(--blue);
+}
+.meaning__gloss { margin: 0; max-width: 36ch; font-size: clamp(18px, 1.6vw, 23px); line-height: 1.45; }
+.meaning__gloss cite { display: block; margin-top: 10px; font-style: normal; font-size: 16px; font-weight: 600; color: var(--gold-text); }
+
+.story {
+  padding: clamp(48px, 10vw, 140px) var(--pad);
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(36px, 6vw, 110px);
+  align-items: start;
+}
+.story__figure { margin: 0; position: sticky; top: 100px; padding-left: 36px; }
+.story__figure img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; }
+.story__stole {
+  position: absolute; left: 0; top: 8%; bottom: -24px; width: 72px; z-index: 1;
+  background-repeat: repeat-y; background-size: 100% auto;
+  box-shadow: 6px 10px 24px rgba(0,0,0,.25);
+}
+.story__text { max-width: 62ch; }
+.story__title {
+  margin: 0 0 32px; font-weight: 800; font-variation-settings: "opsz" 96, "wdth" 82;
+  font-size: clamp(36px, 5.4vw, 80px); line-height: .95; letter-spacing: -.015em; color: var(--black);
+}
+.story__body p { margin: 0 0 1.1em; }
+.story__body p:first-child { font-size: clamp(20px, 1.8vw, 26px); line-height: 1.42; font-weight: 500; color: var(--black); }
+.story__facts { margin: 40px 0 0; display: grid; grid-template-columns: max-content 1fr; border-top: 3px solid var(--black); }
+.story__facts dt, .story__facts dd { margin: 0; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.story__facts dt { padding-right: 32px; color: var(--mute); font-size: 16px; }
+.story__facts dd { font-weight: 500; }
+@media (max-width: 860px) {
+  .story { grid-template-columns: 1fr; }
+  .story__figure { position: relative; top: 0; max-width: 480px; padding-left: 28px; }
+  .story__stole { width: 52px; }
+}
+@media (max-width: 420px) {
+  .story__facts { grid-template-columns: 1fr; }
+  .story__facts dt { padding: 14px 0 0; border-bottom: 0; font-size: 14px; }
+  .story__facts dd { padding-top: 2px; }
+}

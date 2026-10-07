@@ -1,0 +1,8 @@
+node_modules
+.env
+.env.local
+.vercel
+# originals are large and may carry GPS data; keep them on your computer or in Drive.
+# The web-sized copies in photos/web are what the site uses, and those are committed.
+photos/originals/*
+!photos/originals/README.md

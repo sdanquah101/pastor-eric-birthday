@@ -1,0 +1,175 @@
+{
+  "photos": [
+    {
+      "id": "portrait-seated",
+      "file": "portrait-seated.jpg",
+      "alt": "Pastor Eric seated in a white pinstripe outfit",
+      "caption": "",
+      "album": "",
+      "focus": 0.2,
+      "share": true,
+      "w": 1000,
+      "h": 1500,
+      "widths": [
+        267,
+        667,
+        1000
+      ],
+      "color": "#f8f8f8",
+      "bytes": 137296
+    },
+    {
+      "id": "preaching",
+      "file": "preaching.jpg",
+      "alt": "Pastor Eric preaching on stage",
+      "caption": "",
+      "album": "",
+      "focus": 0.4,
+      "w": 1500,
+      "h": 1000,
+      "widths": [
+        400,
+        1000,
+        1500
+      ],
+      "color": "#f8e8f8",
+      "bytes": 125432
+    },
+    {
+      "id": "team-outdoor",
+      "file": "team-outdoor.jpg",
+      "alt": "Pastor Eric with a team dressed in navy, outdoors",
+      "caption": "",
+      "album": "",
+      "focus": 0.3,
+      "w": 1500,
+      "h": 1000,
+      "widths": [
+        400,
+        1000,
+        1500
+      ],
+      "color": "#181848",
+      "bytes": 227334
+    },
+    {
+      "id": "trio",
+      "file": "trio.jpg",
+      "alt": "Pastor Eric with arms crossed between two ministers",
+      "caption": "",
+      "album": "",
+      "focus": 0.3,
+      "w": 1500,
+      "h": 1000,
+      "widths": [
+        400,
+        1000,
+        1500
+      ],
+      "color": "#f8f8f8",
+      "bytes": 141849
+    },
+    {
+      "id": "gesture",
+      "file": "gesture.jpg",
+      "alt": "Pastor Eric gesturing while speaking",
+      "caption": "",
+      "album": "",
+      "focus": 0.3,
+      "w": 1500,
+      "h": 1000,
+      "widths": [
+        400,
+        1000,
+        1500
+      ],
+      "color": "#f8f8f8",
+      "bytes": 130865
+    },
+    {
+      "id": "portrait-mic",
+      "file": "portrait-mic.jpg",
+      "alt": "Pastor Eric smiling with a microphone",
+      "caption": "",
+      "album": "",
+      "focus": 0.2,
+      "w": 1000,
+      "h": 1500,
+      "widths": [
+        267,
+        667,
+        1000
+      ],
+      "color": "#e8e8e8",
+      "bytes": 140246
+    },
+    {
+      "id": "team-stage",
+      "file": "team-stage.jpg",
+      "alt": "Pastor Eric with a large group on stage",
+      "caption": "",
+      "album": "",
+      "focus": 0.35,
+      "w": 1500,
+      "h": 1000,
+      "widths": [
+        400,
+        1000,
+        1500
+      ],
+      "color": "#f8f8f8",
+      "bytes": 195548
+    },
+    {
+      "id": "stage-friends",
+      "file": "stage-friends.jpg",
+      "alt": "Pastor Eric laughing with colleagues on stage",
+      "caption": "",
+      "album": "",
+      "focus": 0.35,
+      "w": 1500,
+      "h": 1000,
+      "widths": [
+        400,
+        1000,
+        1500
+      ],
+      "color": "#f8f8f8",
+      "bytes": 171685
+    },
+    {
+      "id": "team-outdoor-close",
+      "file": "team-outdoor-close.jpg",
+      "alt": "Pastor Eric with young people under the trees",
+      "caption": "",
+      "album": "",
+      "focus": 0.3,
+      "w": 1500,
+      "h": 1000,
+      "widths": [
+        400,
+        1000,
+        1500
+      ],
+      "color": "#181848",
+      "bytes": 185362
+    },
+    {
+      "id": "trio-watch",
+      "file": "trio-watch.jpg",
+      "alt": "Pastor Eric smiling with arms folded beside two friends",
+      "caption": "",
+      "album": "",
+      "focus": 0.3,
+      "w": 1500,
+      "h": 1000,
+      "widths": [
+        400,
+        1000,
+        1500
+      ],
+      "color": "#f8f8f8",
+      "bytes": 132788
+    }
+  ]
+}

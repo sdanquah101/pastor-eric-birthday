@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Happy Birthday, Pastor Eric Obeng Kwakye</title>
+<meta name="description" content="Celebrating Pastor Eric Obeng Kwakye, Executive Director of Phanerosis Network International. Read his story, weave a wish, see the gallery or send a gift.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Happy Birthday, Pastor Eric Obeng Kwakye">
+<meta property="og:description" content="Every wish becomes a thread in his birthday cloth.">
+<!-- After deploying, make this a full address, e.g. https://your-domain/photos/share.jpg, so WhatsApp shows it -->
+<meta property="og:image" content="photos/share.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#141210">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%23E2A610'/><rect x='24' width='16' height='64' fill='%231E38AC'/><rect y='26' width='64' height='12' fill='%23181614'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&display=swap" rel="stylesheet">
+<link rel="preload" href="content/photos.json" as="fetch" crossorigin="anonymous">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/kente.css">
+<link rel="stylesheet" href="assets/css/intro.css">
+<link rel="stylesheet" href="assets/css/nav.css">
+<link rel="stylesheet" href="assets/css/home.css">
+<link rel="stylesheet" href="assets/css/story.css">
+<link rel="stylesheet" href="assets/css/gallery.css">
+<link rel="stylesheet" href="assets/css/wishes.css">
+<link rel="stylesheet" href="assets/css/give.css">
+<script type="module" src="assets/js/main.js"></script>
+</head>
+<body>
+
+<!-- ============ OPENING: THE WEAVE ============ -->
+<div class="intro" id="intro" role="dialog" aria-modal="true" aria-label="Opening">
+  <div class="cloth intro__cloth" data-cloth="61" data-w="96" aria-hidden="true"></div>
+  <div class="intro__shade" aria-hidden="true"></div>
+  <div class="intro__inner">
+    <div class="mosaic" id="mosaic" role="img" aria-label="Photographs of Pastor Eric weaving together into one portrait"></div>
+    <div class="intro__text" id="introText">
+      <p class="intro__kicker">Happy birthday,</p>
+      <h1 class="intro__name"><span data-title>Pastor</span> <span data-first>Eric</span> <span data-middle>Obeng</span> <span data-last>Kwakye</span></h1>
+      <button type="button" class="btn btn--gold" id="enter">Come in</button>
+    </div>
+  </div>
+  <p class="intro__status" id="introStatus" role="status"></p>
+  <button type="button" class="intro__skip" id="skip">Skip</button>
+</div>
+
+<!-- curtain used when moving between rooms -->
+<div class="curtain" id="curtain" aria-hidden="true"></div>
+
+<main>
+  <!-- ============ HOME: THE STOLES ============ -->
+  <section class="room home" id="home" aria-labelledby="homeName">
+    <div class="home__copy">
+      <p class="home__kicker" data-hero-kicker>Happy birthday,</p>
+      <h2 class="home__name" id="homeName">
+        <span class="home__title" data-title>Pastor</span>
+        <span data-first>Eric</span> <span data-middle>Obeng</span>
+        <span data-last>Kwakye</span>
+      </h2>
+      <p class="home__role" data-hero-line></p>
+      <p class="home__date" data-date hidden></p>
+      <p class="home__hint">Choose a stole.</p>
+    </div>
+    <nav class="rack" aria-label="Sections">
+      <div class="rack__rail" aria-hidden="true"></div>
+      <div class="rack__stoles" id="stoles"></div>
+    </nav>
+  </section>
+
+  <!-- ============ HIS STORY ============ -->
+  <section class="room" id="story" hidden aria-labelledby="storyTitle">
+    <div class="roombar-slot"></div>
+    <div class="meaning">
+      <p class="meaning__word" data-meaning-word></p>
+      <p class="meaning__gloss"><span data-meaning-gloss></span> <cite data-meaning-ref></cite></p>
+    </div>
+    <div class="story">
+      <figure class="story__figure">
+        <div class="story__stole" data-strip="23" aria-hidden="true"></div>
+      </figure>
+      <div class="story__text">
+        <h2 class="story__title" id="storyTitle">His story</h2>
+        <div class="story__body" data-bio></div>
+        <dl class="story__facts" data-facts></dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ GALLERY ============ -->
+  <section class="room gallery" id="gallery" hidden aria-labelledby="galleryTitle">
+    <div class="roombar-slot"></div>
+    <div class="gallery__bar">
+      <h2 class="gallery__title" id="galleryTitle"><span data-gallery-heading>Gallery</span> <small id="gTotal"></small></h2>
+      <div class="switch switch--gallery" role="group" aria-label="Gallery view">
+        <button type="button" class="pill is-on" data-view="loom" aria-pressed="true">One by one</button>
+        <button type="button" class="pill" data-view="grid" aria-pressed="false">All photos</button>
+      </div>
+    </div>
+
+    <div class="gallery__loom" id="gLoom">
+      <div class="gallery__stage" id="gStage">
+        <div class="loomframe" id="loomframe" tabindex="0" role="img" aria-roledescription="photo"></div>
+      </div>
+      <p class="gallery__caption" id="gCaption" hidden></p>
+      <div class="gallery__controls">
+        <button type="button" class="gnav" id="gPrev" aria-label="Previous photo">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+        </button>
+        <div class="gallery__progress">
+          <span class="gallery__count" id="gCount" aria-live="polite"></span>
+          <span class="gallery__thread" aria-hidden="true"><i id="gThread"></i></span>
+        </div>
+        <button type="button" class="gnav" id="gNext" aria-label="Next photo">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="gallery__grid" id="gGrid" hidden>
+      <div class="chips" id="gAlbums" role="group" aria-label="Albums" hidden></div>
+      <ul class="photogrid" id="photogrid"></ul>
+      <p class="gallery__empty" id="gEmpty" hidden>No photos here yet.</p>
+    </div>
+  </section>
+
+  <!-- ============ WISHES ============ -->
+  <section class="room wishes" id="wishes" hidden aria-labelledby="wishesTitle">
+    <div class="roombar-slot"></div>
+    <div class="wishes__inner">
+      <div class="wishes__head">
+        <h2 id="wishesTitle">A cloth woven from your wishes</h2>
+        <p>Each message becomes a square in his birthday kente. <span class="wishes__count"><b id="wishCount">0</b> woven so far.</span></p>
+        <a class="btn btn--blue wishes__jump" href="#wishForm">Weave your wish</a>
+      </div>
+      <div class="wishes__grid">
+        <form class="wishform" id="wishForm" novalidate>
+          <h3>Weave your wish</h3>
+          <div class="field">
+            <label for="wName">Your name</label>
+            <input id="wName" name="name" maxlength="60" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="wRel">How you know him</label>
+            <select id="wRel" name="relation" data-relations></select>
+          </div>
+          <div class="field">
+            <label for="wMsg">Your birthday message</label>
+            <textarea id="wMsg" name="message" rows="5" maxlength="600" required></textarea>
+            <span class="field__count"><span id="wMsgCount">0</span>/600</span>
+          </div>
+          <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <button class="btn btn--blue btn--full" type="submit" id="wishSubmit">Weave my wish</button>
+          <p class="formmsg" id="wishMsg" role="status"></p>
+        </form>
+        <div class="loom">
+          <div class="loom__bar">
+            <p>Select a square to read the wish inside it.</p>
+            <div class="switch switch--wishes" role="group" aria-label="View">
+              <button type="button" class="pill is-on" data-view="cloth" aria-pressed="true">Cloth</button>
+              <button type="button" class="pill" data-view="list" aria-pressed="false">Read all</button>
+            </div>
+          </div>
+          <div class="loom__cloth" id="loom" aria-label="Birthday wishes woven as cloth"></div>
+          <p class="loom__empty" id="loomEmpty" hidden>The cloth is waiting for its first thread. Weave the first wish.</p>
+          <ul class="wishlist" id="wishList" hidden></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ GIVE ============ -->
+  <section class="room" id="give" hidden aria-labelledby="giveTitle">
+    <div class="roombar-slot"></div>
+    <div class="give">
+      <div class="give__text">
+        <h2 id="giveTitle" data-give-heading>Send a birthday gift</h2>
+        <p data-give-text></p>
+        <p class="give__secure">Payments are processed by Paystack. Your card and wallet details never touch this site.</p>
+      </div>
+      <form class="giveform" id="giveForm" novalidate>
+        <fieldset class="amounts">
+          <legend>Amount in <span data-currency>GHS</span></legend>
+          <div class="amounts__grid" data-presets></div>
+          <label class="amounts__custom">
+            <span>Other amount</span>
+            <input id="gCustom" inputmode="decimal" placeholder="350">
+          </label>
+        </fieldset>
+        <div class="field">
+          <label for="gName">Your name</label>
+          <input id="gName" maxlength="60" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="gEmail">Email for your receipt</label>
+          <input id="gEmail" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required>
+        </div>
+        <div class="field field--wide">
+          <label for="gNote">Note to Pastor Eric (optional)</label>
+          <input id="gNote" maxlength="200">
+        </div>
+        <label class="check"><input type="checkbox" id="gAnon"> Keep my name private</label>
+        <button class="btn btn--black btn--full" type="submit" id="giveSubmit">Give GHS 200</button>
+        <p class="formmsg" id="giveMsg" role="status"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="foot" id="foot" hidden>
+  <div class="cloth cloth--foot" data-cloth="7" data-w="72" aria-hidden="true"></div>
+  <p class="foot__text" data-footer></p>
+</footer>
+
+<!-- phone tab bar between rooms -->
+<nav class="tabbar" id="tabbar" aria-label="Sections" hidden></nav>
+
+<dialog class="reader" id="reader" aria-labelledby="readerName">
+  <div class="reader__swatch" id="readerSwatch" aria-hidden="true"></div>
+  <div class="reader__body">
+    <p class="reader__msg" id="readerMsg"></p>
+    <p class="reader__from"><strong id="readerName"></strong><span id="readerRel"></span></p>
+    <div class="reader__nav">
+      <button type="button" id="readerPrev">Previous wish</button>
+      <button type="button" id="readerNext">Next wish</button>
+      <button type="button" id="readerClose" class="reader__close">Close</button>
+    </div>
+  </div>
+</dialog>
+
+<template id="roombarTpl">
+  <div class="cloth cloth--top" data-cloth="3" data-w="44" aria-hidden="true"></div>
+  <header class="roombar">
+    <a class="roombar__home" href="#home">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+      <span class="roombar__long">Back to the stoles</span><span class="roombar__short">Home</span>
+    </a>
+    <p class="roombar__here" aria-hidden="true"></p>
+    <nav class="roombar__nav" aria-label="Sections"></nav>
+  </header>
+</template>
+
+<noscript><p style="padding:24px">This birthday site needs JavaScript to weave its cloth. Please turn it on and reload.</p></noscript>
+</body>
+</html>

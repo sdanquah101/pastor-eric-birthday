@@ -1,0 +1,36 @@
+/* ================= GIVE ================= */
+.give {
+  background: var(--cream); padding: clamp(40px, 10vw, 140px) var(--pad);
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 7vw, 120px); align-items: start;
+}
+.give__text h2 {
+  margin: 0 0 24px; font-weight: 800; font-variation-settings: "opsz" 96, "wdth" 80;
+  font-size: clamp(40px, 6vw, 96px); line-height: .9; letter-spacing: -.015em; color: var(--black); max-width: 9ch;
+}
+.give__text p { max-width: 44ch; margin: 0 0 1em; }
+.give__secure { color: var(--mute); font-size: 16px; }
+.giveform { display: grid; grid-template-columns: 1fr 1fr; gap: 22px 18px; background: var(--white); padding: clamp(20px, 3vw, 36px); border-top: 6px solid var(--blue); }
+.amounts { grid-column: 1 / -1; border: 0; margin: 0; padding: 0; min-width: 0; }
+.amounts legend { font-size: 15px; font-weight: 600; margin-bottom: 10px; padding: 0; }
+.amounts__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(88px, 1fr)); gap: 8px; }
+.amt {
+  border: 2px solid #d9d4c7; background: var(--white); padding: 14px 6px; cursor: pointer;
+  font-size: 22px; font-weight: 700; font-variation-settings: "opsz" 48; transition: border-color .15s, background .15s;
+}
+.amt:hover { border-color: var(--black); }
+.amt[aria-pressed="true"] { background: var(--gold); border-color: var(--black); }
+.amounts__custom { display: flex; align-items: center; gap: 12px; margin-top: 10px; font-size: 15px; font-weight: 600; }
+.amounts__custom input { flex: 1; border: 2px solid #d9d4c7; border-radius: 0; padding: 10px 12px; font-size: 18px; outline: none; min-width: 0; }
+.amounts__custom input:focus { border-color: var(--blue); }
+.check { grid-column: 1 / -1; display: flex; gap: 10px; align-items: center; min-height: 44px; font-size: 16px; cursor: pointer; }
+.check input { width: 22px; height: 22px; accent-color: var(--blue); }
+.giveform .btn, .giveform .formmsg { grid-column: 1 / -1; }
+.thanks { grid-column: 1 / -1; }
+.thanks h3 { margin: 0 0 10px; font-size: 36px; font-weight: 800; font-variation-settings: "opsz" 96, "wdth" 82; }
+.thanks p { margin: 0 0 12px; }
+.thanks__ref { color: var(--mute); font-size: 14px; overflow-wrap: anywhere; }
+@media (max-width: 860px) { .give { grid-template-columns: 1fr; } .give__text h2 { max-width: 12ch; } }
+@media (max-width: 520px) {
+  .giveform { grid-template-columns: 1fr; margin: 0 calc(var(--pad) * -1); }
+  .amounts__grid { grid-template-columns: repeat(3, 1fr); }
+}

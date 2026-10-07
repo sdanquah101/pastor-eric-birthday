@@ -1,0 +1,22 @@
+/* ---------- kente cloth bands (strips are painted in assets/js/lib/kente.js) ---------- */
+.cloth { display: flex; overflow: hidden; background: var(--dark); position: relative; }
+.cloth > i {
+  display: block; flex: 0 0 auto; height: 100%;
+  background-repeat: repeat-y; background-size: 100% auto;
+}
+/* cloth depth: soft light across the fabric, shading where it meets the page */
+.cloth::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.28), rgba(0,0,0,0) 14%, rgba(0,0,0,0) 86%, rgba(0,0,0,.3)),
+    linear-gradient(105deg, rgba(255,255,255,0) 20%, rgba(255,240,200,.10) 45%, rgba(255,255,255,0) 65%);
+}
+.cloth--top { height: 10px; }
+.cloth--foot { height: 56px; }
+
+/* ---------- curtain: the cloth that sweeps across between rooms ---------- */
+.curtain {
+  position: fixed; inset: 0; z-index: 90; pointer-events: none; display: none;
+  background-repeat: repeat; background-size: 96px auto; background-color: var(--dark);
+}
+.curtain.is-on { display: block; }

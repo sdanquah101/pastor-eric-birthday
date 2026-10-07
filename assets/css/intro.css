@@ -1,0 +1,56 @@
+/* ================= OPENING: THE WEAVE ================= */
+.intro {
+  position: fixed; inset: 0; z-index: 100; overflow: hidden; color: var(--white); background: var(--dark);
+  display: grid; place-items: center;
+  padding: env(safe-area-inset-top, 0px) 0 var(--safe-b);
+}
+.intro .intro__cloth { position: absolute; inset: 0; height: 100%; }
+.intro__shade {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 40% 50%, rgba(8,8,8,.55), rgba(8,8,8,.82) 75%);
+}
+.intro__inner {
+  position: relative; display: flex; align-items: center; gap: clamp(28px, 5vw, 80px);
+  padding: 0 var(--pad); max-width: 100%;
+}
+.mosaic {
+  --mw: 300px; --mh: 400px;
+  position: relative; width: var(--mw); height: var(--mh); flex: 0 0 auto;
+}
+.mosaic::after { /* frame shadow once woven */
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  box-shadow: 0 40px 90px rgba(0,0,0,.55); opacity: 0; transition: opacity 1s;
+}
+.mosaic.is-done::after { opacity: 1; }
+.cell { position: absolute; overflow: hidden; will-change: transform; }
+.cell > i { position: absolute; inset: 0; background-repeat: no-repeat; }
+.cell > i + i { opacity: 0; }
+/* over/under: warp cells pass under the weft at their ends, weft cells at their sides */
+.cell--warp { box-shadow: inset 0 8px 8px -6px rgba(0,0,0,.6), inset 0 -8px 8px -6px rgba(0,0,0,.6); }
+.cell--weft { box-shadow: inset 8px 0 8px -6px rgba(0,0,0,.6), inset -8px 0 8px -6px rgba(0,0,0,.6); }
+.cell::after { content: ""; position: absolute; inset: 0; box-shadow: inherit; z-index: 1; pointer-events: none; }
+.intro__text { max-width: 30ch; opacity: 0; transform: translateY(16px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+.intro__text.is-in { opacity: 1; transform: none; }
+.intro__kicker { margin: 0 0 6px; font-size: clamp(20px, 2vw, 28px); font-weight: 500; color: #f6d77a; }
+.intro__name {
+  margin: 0 0 28px; font-weight: 800; text-transform: uppercase; line-height: .9;
+  font-variation-settings: "opsz" 96, "wdth" 78; font-size: clamp(40px, 5.6vw, 92px);
+}
+.intro__status { position: absolute; left: var(--pad); bottom: calc(24px + var(--safe-b)); margin: 0; font-size: 15px; color: rgba(255,255,255,.75); }
+.intro__skip {
+  position: absolute; right: var(--pad); bottom: calc(14px + var(--safe-b)); min-height: 44px; background: none; border: 0; cursor: pointer;
+  color: var(--white); font-size: 15px; font-weight: 600; padding: 8px 4px; text-decoration: underline; text-underline-offset: 4px;
+}
+.intro.is-leaving { animation: lift 1s var(--ease) forwards; }
+@keyframes lift { to { transform: translateY(-100%); } }
+
+@media (max-width: 759.98px) {
+  .intro__inner { flex-direction: column; gap: 22px; text-align: center; }
+  .intro__name { margin-bottom: 18px; font-size: clamp(34px, 10vw, 52px); }
+  .intro__kicker { font-size: 19px; }
+}
+/* phones on their side: photo and name side by side, a little smaller */
+@media (min-width: 760px) and (max-height: 520px) {
+  .intro__name { font-size: clamp(30px, 7vh, 48px); margin-bottom: 14px; }
+  .intro__kicker { font-size: 17px; }
+}

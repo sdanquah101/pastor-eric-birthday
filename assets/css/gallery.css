@@ -1,0 +1,104 @@
+/* ================= GALLERY ================= */
+.gallery { background: var(--cream); }
+.gallery__bar {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px 16px; flex-wrap: wrap;
+  padding: 14px var(--pad) 10px;
+}
+.gallery__title {
+  margin: 0; font-weight: 800; font-variation-settings: "opsz" 96, "wdth" 82;
+  font-size: clamp(26px, 3vw, 40px); line-height: 1; color: var(--black);
+}
+.gallery__title small { font-size: 15px; font-weight: 600; color: var(--mute); font-variation-settings: "opsz" 14; margin-left: 4px; }
+
+/* --- one by one: the loom fills the screen --- */
+.gallery[data-view="loom"] {
+  display: flex; flex-direction: column; overflow: hidden;
+  height: 100vh; height: 100svh; min-height: 0;
+}
+.gallery__loom { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+.gallery__stage {
+  flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center;
+  padding: 6px var(--pad) 0; overflow: hidden;
+}
+.loomframe {
+  position: relative; display: flex; overflow: hidden; flex: 0 0 auto; cursor: grab; touch-action: none;
+  background: var(--dark); box-shadow: 0 30px 70px rgba(0,0,0,.28); outline-offset: 6px;
+  user-select: none; -webkit-user-select: none;
+}
+.loomframe:active { cursor: grabbing; }
+.loomframe.is-loading { cursor: progress; }
+.loomframe.is-loading::before { /* a thread running along the top while the next photo arrives */
+  content: ""; position: absolute; left: 0; top: 0; height: 4px; width: 30%; z-index: 2; background: var(--gold);
+  animation: fetching 1s linear infinite;
+}
+@keyframes fetching { from { transform: translateX(-100%); } to { transform: translateX(340%); } }
+.lstrip { position: relative; height: 100%; overflow: hidden; flex: 0 0 auto; }
+.lstrip + .lstrip { box-shadow: inset 1px 0 0 rgba(0,0,0,.35); }
+.lreel { position: absolute; left: 0; top: 0; width: 100%; will-change: transform; }
+.lseg { display: block; width: 100%; background-repeat: no-repeat; }
+.lseg--kente { background-repeat: repeat-y; background-size: 100% auto; box-shadow: inset 0 10px 12px -8px rgba(0,0,0,.6), inset 0 -10px 12px -8px rgba(0,0,0,.6); }
+.lstrip::after { /* fibre shading so each strip reads as cloth */
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(90deg, rgba(0,0,0,.14), rgba(255,255,255,.04) 30%, rgba(0,0,0,0) 60%, rgba(0,0,0,.16));
+}
+.gallery__caption { margin: 12px auto 0; padding: 0 var(--pad); max-width: 70ch; text-align: center; font-size: 16px; color: var(--ink); }
+.gallery__controls {
+  display: flex; align-items: center; justify-content: center; gap: clamp(14px, 3vw, 28px);
+  padding: 14px var(--pad) 18px;
+}
+.gnav {
+  flex: 0 0 auto; width: 52px; height: 52px; border-radius: 50%; border: 2px solid var(--black);
+  background: var(--white); display: grid; place-items: center; cursor: pointer; transition: background .2s, color .2s;
+}
+.gnav:hover { background: var(--black); color: var(--white); }
+.gallery__progress { display: grid; gap: 8px; justify-items: center; width: min(320px, 46vw); }
+.gallery__count { font-size: 15px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.gallery__thread { display: block; width: 100%; height: 6px; background: var(--line); overflow: hidden; }
+.gallery__thread i { display: block; height: 100%; width: 0; background-size: auto 100%; background-repeat: repeat-x; transition: width .5s var(--ease); }
+
+/* --- all photos --- */
+.gallery__grid { padding: 4px var(--pad) clamp(40px, 6vw, 80px); }
+.chips { margin: 0 0 14px; }
+.photogrid {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 8px;
+}
+.ph {
+  display: block; width: 100%; padding: 0; border: 0; cursor: zoom-in; background: none;
+  aspect-ratio: 1; overflow: hidden;
+}
+.ph img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s var(--ease), filter .3s; }
+.ph:hover img { transform: scale(1.05); }
+.ph:focus-visible { outline-offset: -3px; }
+.gallery__empty { margin: 0; padding: 48px 24px; text-align: center; border: 2px dashed var(--line); color: var(--mute); }
+
+@media (max-width: 759.98px) {
+  .gallery[data-view="loom"] { height: 100vh; height: 100svh; }
+  .gallery__bar { padding-top: 10px; padding-bottom: 8px; flex-wrap: nowrap; }
+  .gallery__title { font-size: 24px; }
+  .gallery__title small { display: block; margin: 4px 0 0; font-size: 13px; }
+  .switch--gallery .pill { min-height: 36px; padding: 4px 12px; font-size: 14px; }
+  .gallery__controls { padding-top: 10px; padding-bottom: 12px; }
+  .gnav { width: 48px; height: 48px; }
+  .gallery__grid { padding-left: 4px; padding-right: 4px; }
+  .chips { padding: 0 12px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-bottom: 10px; }
+  .chips::-webkit-scrollbar { display: none; }
+  .photogrid { grid-template-columns: repeat(3, 1fr); gap: 3px; }
+}
+
+/* short screens (phones on their side): arrows beside the frame, counter over its foot */
+@media (max-height: 520px) and (min-width: 560px) {
+  .gallery__bar { padding-top: 6px; padding-bottom: 4px; }
+  .gallery__title { font-size: 22px; }
+  .switch--gallery .pill { min-height: 34px; padding: 3px 12px; font-size: 14px; }
+  .gallery__loom { position: relative; }
+  .gallery__stage { padding: 0 84px 30px; }
+  .gallery__caption { display: none; }
+  .gallery__controls {
+    position: absolute; inset: 0 0 0 0; padding: 0 16px; justify-content: space-between; pointer-events: none;
+  }
+  .gnav { pointer-events: auto; width: 48px; height: 48px; margin-bottom: 30px; }
+  .gallery__progress { position: absolute; left: 50%; bottom: 4px; transform: translateX(-50%); gap: 4px; width: min(260px, 40vw); }
+  .gallery__count { font-size: 13px; }
+  .gallery__thread { height: 4px; }
+}
