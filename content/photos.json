@@ -172,91 +172,6 @@
       "bytes": 132788
     },
     {
-      "id": "giya-2025-01-seated",
-      "file": "giya-2025/01-seated.jpg",
-      "alt": "Pastor Eric seated on a wooden chair at the GIYA Conference, wearing a headset microphone and a blue checked blazer, gesturing as he speaks",
-      "caption": "",
-      "album": "GIYA Conference 2025",
-      "focus": 0.25,
-      "w": 1333,
-      "h": 2000,
-      "widths": [
-        267,
-        667,
-        1200
-      ],
-      "color": "#f8f8f8",
-      "bytes": 456549
-    },
-    {
-      "id": "giya-2025-02-pointing",
-      "file": "giya-2025/02-pointing.jpg",
-      "alt": "Pastor Eric smiling and pointing across a sunlit hall while speaking at the GIYA Conference",
-      "caption": "",
-      "album": "GIYA Conference 2025",
-      "focus": 0.35,
-      "w": 1333,
-      "h": 2000,
-      "widths": [
-        267,
-        667,
-        1200
-      ],
-      "color": "#f8f8f8",
-      "bytes": 326240
-    },
-    {
-      "id": "giya-2025-03-lectern",
-      "file": "giya-2025/03-lectern.jpg",
-      "alt": "Pastor Eric speaking from a wooden lectern in front of the green and orange GIYA Conference 2025 banners",
-      "caption": "",
-      "album": "GIYA Conference 2025",
-      "focus": 0.4,
-      "w": 2000,
-      "h": 1333,
-      "widths": [
-        400,
-        1000,
-        1800
-      ],
-      "color": "#089868",
-      "bytes": 458046
-    },
-    {
-      "id": "giya-2025-04-lectern-laughing",
-      "file": "giya-2025/04-lectern-laughing.jpg",
-      "alt": "Pastor Eric laughing mid-sentence as he leans on the lectern at the GIYA Conference 2025",
-      "caption": "",
-      "album": "GIYA Conference 2025",
-      "focus": 0.45,
-      "w": 2000,
-      "h": 1333,
-      "widths": [
-        400,
-        1000,
-        1800
-      ],
-      "color": "#089858",
-      "bytes": 449037
-    },
-    {
-      "id": "giya-2025-05-integrity",
-      "file": "giya-2025/05-integrity.jpg",
-      "alt": "Pastor Eric speaking with hands clasped in front of an orange GIYA Conference banner reading Integrity",
-      "caption": "",
-      "album": "GIYA Conference 2025",
-      "focus": 0.35,
-      "w": 1333,
-      "h": 2000,
-      "widths": [
-        267,
-        667,
-        1200
-      ],
-      "color": "#f88838",
-      "bytes": 502405
-    },
-    {
       "id": "heaven-on-earth-camp-2022-01-with-guest",
       "file": "heaven-on-earth-camp-2022/01-with-guest.jpg",
       "alt": "Pastor Eric in a two-tone blue outfit, smiling beside a woman in a bright kente-print dress in front of the stage",
@@ -510,6 +425,125 @@
       ],
       "color": "#08f8f8",
       "bytes": 347983
+    },
+    {
+      "id": "heaven-on-earth-camp-2022-16-carving-with-friend",
+      "file": "heaven-on-earth-camp-2022/16-carving-with-friend.jpg",
+      "alt": "Pastor Eric in a dark suit smiling beside a man in a cream and gold patterned outfit, under the carved wooden panel",
+      "caption": "",
+      "album": "Heaven on Earth Camp 2022",
+      "focus": 0.25,
+      "w": 1333,
+      "h": 2000,
+      "widths": [
+        267,
+        667,
+        1200
+      ],
+      "color": "#f8f8f8",
+      "bytes": 393679
+    },
+    {
+      "id": "heaven-on-earth-camp-2022-17-carving-with-friend-2",
+      "file": "heaven-on-earth-camp-2022/17-carving-with-friend-2.jpg",
+      "alt": "Pastor Eric and a friend in a cream and gold outfit smiling side by side in front of the carved wooden panel",
+      "caption": "",
+      "album": "Heaven on Earth Camp 2022",
+      "focus": 0.25,
+      "w": 2000,
+      "h": 1340,
+      "widths": [
+        400,
+        1000,
+        1800
+      ],
+      "color": "#482848",
+      "bytes": 402836
+    },
+    {
+      "id": "giya-2025-01-seated",
+      "file": "giya-2025/01-seated.jpg",
+      "alt": "Pastor Eric seated on a wooden chair at the GIYA Conference, wearing a headset microphone and a blue checked blazer, gesturing as he speaks",
+      "caption": "",
+      "album": "GIYA Conference 2025",
+      "focus": 0.25,
+      "w": 1333,
+      "h": 2000,
+      "widths": [
+        267,
+        667,
+        1200
+      ],
+      "color": "#f8f8f8",
+      "bytes": 456549
+    },
+    {
+      "id": "giya-2025-02-pointing",
+      "file": "giya-2025/02-pointing.jpg",
+      "alt": "Pastor Eric smiling and pointing across a sunlit hall while speaking at the GIYA Conference",
+      "caption": "",
+      "album": "GIYA Conference 2025",
+      "focus": 0.35,
+      "w": 1333,
+      "h": 2000,
+      "widths": [
+        267,
+        667,
+        1200
+      ],
+      "color": "#f8f8f8",
+      "bytes": 326240
+    },
+    {
+      "id": "giya-2025-03-lectern",
+      "file": "giya-2025/03-lectern.jpg",
+      "alt": "Pastor Eric speaking from a wooden lectern in front of the green and orange GIYA Conference 2025 banners",
+      "caption": "",
+      "album": "GIYA Conference 2025",
+      "focus": 0.4,
+      "w": 2000,
+      "h": 1333,
+      "widths": [
+        400,
+        1000,
+        1800
+      ],
+      "color": "#089868",
+      "bytes": 458046
+    },
+    {
+      "id": "giya-2025-04-lectern-laughing",
+      "file": "giya-2025/04-lectern-laughing.jpg",
+      "alt": "Pastor Eric laughing mid-sentence as he leans on the lectern at the GIYA Conference 2025",
+      "caption": "",
+      "album": "GIYA Conference 2025",
+      "focus": 0.45,
+      "w": 2000,
+      "h": 1333,
+      "widths": [
+        400,
+        1000,
+        1800
+      ],
+      "color": "#089858",
+      "bytes": 449037
+    },
+    {
+      "id": "giya-2025-05-integrity",
+      "file": "giya-2025/05-integrity.jpg",
+      "alt": "Pastor Eric speaking with hands clasped in front of an orange GIYA Conference banner reading Integrity",
+      "caption": "",
+      "album": "GIYA Conference 2025",
+      "focus": 0.35,
+      "w": 1333,
+      "h": 2000,
+      "widths": [
+        267,
+        667,
+        1200
+      ],
+      "color": "#f88838",
+      "bytes": 502405
     },
     {
       "id": "giya-2025-06-backdrop-trio",
@@ -782,6 +816,23 @@
       ],
       "color": "#f80818",
       "bytes": 350644
+    },
+    {
+      "id": "giya-2025-22-stage-hands-clasped",
+      "file": "giya-2025/22-stage-hands-clasped.jpg",
+      "alt": "Pastor Eric glancing to the side with hands clasped as he speaks on stage in front of the orange GIYA banner",
+      "caption": "",
+      "album": "GIYA Conference 2025",
+      "focus": 0.25,
+      "w": 1333,
+      "h": 2000,
+      "widths": [
+        267,
+        667,
+        1200
+      ],
+      "color": "#f8f8f8",
+      "bytes": 464724
     }
   ]
 }
