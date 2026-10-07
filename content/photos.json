@@ -595,6 +595,40 @@
       ],
       "color": "#f85858",
       "bytes": 408458
+    },
+    {
+      "id": "giya-2025-11-backdrop-two-guests",
+      "file": "giya-2025/11-backdrop-two-guests.jpg",
+      "alt": "Pastor Eric smiling with his arms around two young women, one in a GIYA T-shirt and one in an olive jacket, at the GIYA Conference 2025 backdrop",
+      "caption": "",
+      "album": "GIYA Conference 2025",
+      "focus": 0.3,
+      "w": 2000,
+      "h": 1333,
+      "widths": [
+        400,
+        1000,
+        1800
+      ],
+      "color": "#f86858",
+      "bytes": 352361
+    },
+    {
+      "id": "giya-2025-12-backdrop-two-guests-2",
+      "file": "giya-2025/12-backdrop-two-guests-2.jpg",
+      "alt": "Pastor Eric and two smiling young women posing together in front of the red PHANET Templates of Excellence backdrop",
+      "caption": "",
+      "album": "GIYA Conference 2025",
+      "focus": 0.3,
+      "w": 2000,
+      "h": 1333,
+      "widths": [
+        400,
+        1000,
+        1800
+      ],
+      "color": "#f87868",
+      "bytes": 493351
     }
   ]
 }
