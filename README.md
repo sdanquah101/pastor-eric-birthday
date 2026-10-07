@@ -76,7 +76,7 @@ For the full thing use `npx vercel dev` with a `.env` file (see `.env.example`).
 
 ## 2. Paystack
 1. Dashboard > Settings > API Keys & Webhooks. Copy the **public** and **secret** keys (use the test keys first).
-2. After deploying, set the **Webhook URL** to `https://YOUR-DOMAIN/api/paystack-webhook`.
+2. Set the **Webhook URL** to `https://pastor-eric-birthday.vercel.app/api/paystack-webhook`.
    A Paystack account has one webhook URL. If this is the same account as phaneteers.com
    (whose webhook is `https://phaneteers.com/api/paystack/webhook`), use a separate Paystack account or
    subaccount for the birthday, or gifts are still confirmed by `/api/verify` when the giver keeps the page open.
@@ -90,8 +90,8 @@ For the full thing use `npx vercel dev` with a `.env` file (see `.env.example`).
    - `PAYSTACK_PUBLIC_KEY` — pk_test_… / pk_live_…
    - `PAYSTACK_SECRET_KEY` — sk_test_… / sk_live_…
    - `IP_SALT` — any random words (used to rate-limit wishes without storing IPs)
-4. Deploy. Then in `index.html` change `og:image` to the full address
-   (`https://YOUR-DOMAIN/photos/share.jpg`) so WhatsApp shows the preview photo.
+4. Deploy. The live site is https://pastor-eric-birthday.vercel.app/. If it moves to another domain,
+   update `og:url` and `og:image` in `index.html` so WhatsApp still shows the preview photo.
 
 ## 4. Fill in the words
 Open `content/site.js` and replace everything in `[square brackets]`.
