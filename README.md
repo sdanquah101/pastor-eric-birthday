@@ -21,7 +21,7 @@ assets/
   css/                     one file per part: base, kente, intro, nav, home, story, gallery, wishes, give
   js/main.js               boots the page
   js/lib/                  dom helpers, kente generator, photo library
-  js/rooms/                intro, home (stoles), nav (rooms + curtain), story, gallery, wishes, give
+  js/rooms/                intro, home (stoles), nav (rooms + curtain), story, gallery, wishes, give (form), gifts (gift cloth)
 api/                       Vercel functions: wishes, verify, paystack-webhook, config, givers (gift wall), gifts (admin)
 admin.html                 organisers' page at /admin: who has given, totals, CSV
 db/schema.sql              run once in Neon
@@ -109,7 +109,8 @@ amount, method, note, email, Paystack reference), the total received, and a CSV 
 - Warnings at the top of the page say when a setting is missing in Vercel (e.g. `PAYSTACK_SECRET_KEY`).
 - "private" next to a name means the giver ticked "Keep my name private". The organisers still see it.
 
-The public gift wall in the Give room (from `/api/givers`) shows each giver's name and note and the total raised.
+At the top of the Give room, the gift cloth (from `/api/givers`, drawn by `assets/js/rooms/gifts.js`) shows the
+total raised and one kente strip per gift; a spotlight cycles through the givers' notes and "Read all" lists them.
 Individual amounts, emails and references stay on `/admin`. Private givers appear as "A friend".
 
 ## Managing wishes and gifts (Neon SQL Editor)

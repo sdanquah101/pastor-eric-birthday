@@ -35,18 +35,86 @@
   .amounts__grid { grid-template-columns: repeat(3, 1fr); }
 }
 
-/* gift wall: who has given (names and notes; amounts stay on /admin) */
+/* ---------- the gift cloth (top of the Give room) ---------- */
 .check small { font-size: 14px; color: var(--mute); }
-.givers { padding: clamp(36px, 6vw, 80px) var(--pad) clamp(48px, 7vw, 100px); background: var(--white); }
-.givers__head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px; margin-bottom: 22px; border-bottom: 3px solid var(--black); padding-bottom: 14px; }
-.givers__head h3 { margin: 0; font-weight: 800; font-variation-settings: "opsz" 96, "wdth" 82; font-size: clamp(28px, 3.6vw, 48px); line-height: 1; color: var(--black); }
-.givers__total { margin: 0; font-size: clamp(17px, 1.6vw, 21px); font-weight: 700; color: var(--blue); font-variant-numeric: tabular-nums; }
-.givers__list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 12px; }
-.givers__list.is-clipped > li:nth-child(n + 13) { display: none; }
-.giver { display: grid; gap: 6px; align-content: start; padding: 14px 16px 16px; background: var(--cream); border-top: 4px solid var(--gold); min-width: 0; }
-.giver:nth-child(3n + 2) { border-top-color: var(--blue); }
-.giver:nth-child(3n + 3) { border-top-color: var(--black); }
-.giver__name { font-size: 17px; font-weight: 700; color: var(--black); overflow-wrap: anywhere; }
-.giver__note { font-size: 16px; line-height: 1.5; color: var(--ink); overflow-wrap: anywhere; }
-.giver__note::before { content: "“"; } .giver__note::after { content: "”"; }
-.givers__more { margin-top: 18px; }
+.giveform { scroll-margin-top: 76px; }
+.gifts {
+  position: relative; color: var(--white); background: var(--dark);
+  padding: clamp(28px, 5vw, 64px) var(--pad) clamp(28px, 4vw, 48px);
+  background-image: radial-gradient(ellipse at 20% 0%, rgba(232,173,18,.18), transparent 60%);
+}
+.gifts__top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px 24px; margin-bottom: clamp(18px, 3vw, 30px); }
+.gifts__kicker { margin: 0 0 6px; font-size: clamp(15px, 1.4vw, 18px); font-weight: 600; color: rgba(255,255,255,.72); }
+.gifts__total {
+  margin: 0; font-weight: 800; font-variation-settings: "opsz" 96, "wdth" 78; line-height: .9; letter-spacing: -.015em;
+  font-size: clamp(52px, 9vw, 128px); color: var(--gold); font-variant-numeric: tabular-nums;
+}
+.gifts__count { margin: 10px 0 0; max-width: 40ch; font-size: clamp(16px, 1.5vw, 20px); color: rgba(255,255,255,.85); }
+.switch--gifts .pill { border-color: rgba(255,255,255,.7); color: var(--white); }
+.switch--gifts .pill:hover { background: rgba(255,255,255,.08); }
+.switch--gifts .pill.is-on { background: var(--white); color: var(--black); border-color: var(--white); }
+
+/* the strips hang from a rail, like the stoles on the home page */
+.gifts__cloth {
+  --sw: 48px; --sh: 170px;
+  position: relative; display: flex; flex-wrap: wrap; gap: 14px 4px; padding-top: 14px;
+}
+.gifts__cloth::before { /* the rail */
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 8px; border-radius: 8px;
+  background: linear-gradient(180deg, #4a4a4a, #0c0c0c 60%, #2b2b2b); box-shadow: 0 4px 10px rgba(0,0,0,.5);
+}
+.gstrip {
+  position: relative; flex: 0 0 var(--sw); width: var(--sw); height: var(--sh); padding: 0; border: 0; cursor: pointer;
+  background-color: #2a2622; background-size: 100% auto; background-repeat: repeat-y;
+  box-shadow: inset 6px 0 10px -6px rgba(0,0,0,.6), inset -6px 0 10px -6px rgba(0,0,0,.6), 0 14px 18px -12px rgba(0,0,0,.8);
+  transform-origin: 50% 0; transition: transform .35s var(--ease), filter .25s, box-shadow .25s;
+  animation: hang 1s var(--ease) both;
+}
+.gstrip::after { /* fringe */
+  content: ""; position: absolute; left: 8%; right: 8%; top: 100%; height: 12px;
+  background: repeating-linear-gradient(90deg, #e2a610 0 2px, transparent 2px 4px, #181614 4px 5px, transparent 5px 7px);
+  -webkit-mask-image: linear-gradient(180deg, #000 40%, transparent); mask-image: linear-gradient(180deg, #000 40%, transparent);
+}
+.gstrip.is-still { animation: none; }
+@keyframes hang { from { transform: scaleY(0); } }
+.gstrip:hover, .gstrip:focus-visible { transform: translateY(4px); filter: brightness(1.12); outline: none; }
+.gstrip.is-on { transform: translateY(8px); box-shadow: 0 0 0 3px var(--gold), 0 18px 24px -10px rgba(0,0,0,.8); }
+.gstrip.is-new { animation: hang 1.2s var(--ease) both, glow 2.4s 1.2s ease-out; }
+@keyframes glow { 0% { box-shadow: 0 0 0 4px var(--gold), 0 0 30px 6px rgba(232,173,18,.7); } 100% { box-shadow: 0 0 0 3px var(--gold); } }
+.gstrip--loose { /* bare warp threads: room for more */
+  cursor: default; animation: none; box-shadow: none;
+  background: repeating-linear-gradient(90deg, transparent 0 5px, rgba(232,173,18,.45) 5px 6px, transparent 6px 10px, rgba(255,255,255,.12) 10px 11px);
+  -webkit-mask-image: linear-gradient(180deg, #000 30%, transparent); mask-image: linear-gradient(180deg, #000 30%, transparent);
+}
+.gstrip--loose::after { display: none; }
+.gstrip--loose:hover { transform: none; filter: none; }
+
+/* the note in the spotlight */
+.gifts__spot {
+  margin: clamp(26px, 4vw, 40px) 0 0; padding: 0 0 0 18px; border-left: 4px solid var(--gold); max-width: 62ch; min-height: 4.4em;
+  transition: opacity .22s, transform .22s var(--ease);
+}
+.gifts__spot.is-swap { opacity: 0; transform: translateY(6px); }
+.gifts__spot blockquote { margin: 0; font-size: clamp(20px, 2.1vw, 28px); line-height: 1.35; font-weight: 500; overflow-wrap: anywhere; }
+.gifts__spot:not(.is-plain):not(.is-empty) blockquote::before { content: "“"; }
+.gifts__spot:not(.is-plain):not(.is-empty) blockquote::after { content: "”"; }
+.gifts__spot.is-plain blockquote, .gifts__spot.is-empty blockquote { color: rgba(255,255,255,.75); }
+.gifts__spot figcaption { margin-top: 8px; font-size: 16px; font-weight: 700; color: var(--gold); }
+.gifts__spot figcaption:not(:empty)::before { content: "— "; }
+
+/* "Read all" */
+.gifts__list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 10px; }
+.gift { display: grid; gap: 6px; align-content: start; padding: 14px 16px; background: rgba(255,255,255,.06); border-top: 3px solid var(--gold); min-width: 0; }
+.gift__name { font-weight: 700; color: var(--gold); overflow-wrap: anywhere; }
+.gift__note { line-height: 1.5; overflow-wrap: anywhere; }
+.gift__note::before { content: "“"; } .gift__note::after { content: "”"; }
+
+.gifts__cta { margin-top: clamp(22px, 3vw, 32px); }
+.thanks__see { margin-top: 6px; }
+
+@media (max-width: 759.98px) {
+  .gifts__top { align-items: flex-start; }
+  .switch--gifts .pill { min-height: 36px; padding: 4px 12px; font-size: 14px; }
+  .gifts__cloth { gap: 12px 3px; }
+  .gifts__cta { width: 100%; }
+}

@@ -176,6 +176,27 @@
   <!-- ============ GIVE ============ -->
   <section class="room" id="give" hidden aria-labelledby="giveTitle">
     <div class="roombar-slot"></div>
+    <!-- the gift cloth: one kente strip per gift, from /api/givers. Names and notes only; amounts stay on /admin -->
+    <section class="gifts" id="gifts" aria-labelledby="giftsTitle" hidden>
+      <div class="gifts__top">
+        <div class="gifts__sum">
+          <p class="gifts__kicker">His birthday cloth of gifts</p>
+          <h2 class="gifts__total" id="giftsTitle"><span id="giftsTotal"></span></h2>
+          <p class="gifts__count" id="giftsCount"></p>
+        </div>
+        <div class="switch switch--gifts" role="group" aria-label="View gifts">
+          <button type="button" class="pill is-on" data-view="cloth" aria-pressed="true">Cloth</button>
+          <button type="button" class="pill" data-view="list" aria-pressed="false">Read all</button>
+        </div>
+      </div>
+      <div class="gifts__cloth" id="giftsCloth" role="list" aria-label="One strip for each gift"></div>
+      <figure class="gifts__spot" id="giftsSpot">
+        <blockquote id="spotNote"></blockquote>
+        <figcaption id="spotName"></figcaption>
+      </figure>
+      <ul class="gifts__list" id="giftsList" hidden></ul>
+      <a class="btn btn--gold gifts__cta" href="#giveForm" id="giftsCta">Add your gift</a>
+    </section>
     <div class="give">
       <div class="give__text">
         <h2 id="giveTitle" data-give-heading>Send a birthday gift</h2>
@@ -209,15 +230,6 @@
       </form>
     </div>
 
-    <!-- gift wall: names and notes from /api/givers; individual amounts are never shown -->
-    <section class="givers" id="givers" aria-labelledby="giversTitle" hidden>
-      <div class="givers__head">
-        <h3 id="giversTitle">Gifts from the family</h3>
-        <p class="givers__total" id="giversTotal" aria-live="polite"></p>
-      </div>
-      <ul class="givers__list" id="giversList"></ul>
-      <button type="button" class="btn btn--line givers__more" id="giversMore" hidden>Show all</button>
-    </section>
   </section>
 </main>
 
