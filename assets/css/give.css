@@ -34,3 +34,19 @@
   .giveform { grid-template-columns: 1fr; margin: 0 calc(var(--pad) * -1); }
   .amounts__grid { grid-template-columns: repeat(3, 1fr); }
 }
+
+/* gift wall: who has given (names and notes; amounts stay on /admin) */
+.check small { font-size: 14px; color: var(--mute); }
+.givers { padding: clamp(36px, 6vw, 80px) var(--pad) clamp(48px, 7vw, 100px); background: var(--white); }
+.givers__head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px; margin-bottom: 22px; border-bottom: 3px solid var(--black); padding-bottom: 14px; }
+.givers__head h3 { margin: 0; font-weight: 800; font-variation-settings: "opsz" 96, "wdth" 82; font-size: clamp(28px, 3.6vw, 48px); line-height: 1; color: var(--black); }
+.givers__total { margin: 0; font-size: clamp(17px, 1.6vw, 21px); font-weight: 700; color: var(--blue); font-variant-numeric: tabular-nums; }
+.givers__list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 12px; }
+.givers__list.is-clipped > li:nth-child(n + 13) { display: none; }
+.giver { display: grid; gap: 6px; align-content: start; padding: 14px 16px 16px; background: var(--cream); border-top: 4px solid var(--gold); min-width: 0; }
+.giver:nth-child(3n + 2) { border-top-color: var(--blue); }
+.giver:nth-child(3n + 3) { border-top-color: var(--black); }
+.giver__name { font-size: 17px; font-weight: 700; color: var(--black); overflow-wrap: anywhere; }
+.giver__note { font-size: 16px; line-height: 1.5; color: var(--ink); overflow-wrap: anywhere; }
+.giver__note::before { content: "“"; } .giver__note::after { content: "”"; }
+.givers__more { margin-top: 18px; }

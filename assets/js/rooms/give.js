@@ -1,8 +1,40 @@
 /* ================= GIVE (Paystack) =================
    Paystack's popup takes the payment; /api/verify confirms it server-side
-   and /api/paystack-webhook records it even if the giver closes the tab. */
+   and /api/paystack-webhook records it even if the giver closes the tab.
+   Below the form, the gift wall lists who has given (names and notes, never
+   individual amounts) and the total raised, from /api/givers. */
 import { $, $$, h, API, fmt } from "../lib/dom.js";
+import { onRoom } from "./nav.js";
 import SITE from "../../../content/site.js";
+
+const WALL_FIRST = 12; // givers shown before "Show all"
+
+async function loadGivers(fresh = false) {
+  const wall = $("#givers");
+  let data;
+  try {
+    const r = await fetch(API + "/givers" + (fresh ? `?t=${Date.now()}` : ""), { headers: { accept: "application/json" } });
+    if (!r.ok) throw new Error(r.status);
+    data = await r.json();
+  } catch {
+    wall.hidden = true; // preview mode or API down: no wall rather than a broken one
+    return;
+  }
+  const money = (t) => fmt(t.amount_minor / 100, t.currency);
+  const n = data.count || 0;
+  $("#giversTotal").textContent = n
+    ? `${(data.totals || []).map(money).join(" + ")} raised · ${n.toLocaleString()} gift${n === 1 ? "" : "s"}`
+    : "No gifts yet. Yours could be the first.";
+  const items = (data.givers || []).map((g) => h("li", { class: "giver" },
+    h("b", { class: "giver__name", text: g.name || "A friend" }),
+    g.note ? h("q", { class: "giver__note", text: g.note }) : null));
+  const list = $("#giversList"), more = $("#giversMore");
+  list.replaceChildren(...items);
+  list.classList.toggle("is-clipped", items.length > WALL_FIRST);
+  more.hidden = items.length <= WALL_FIRST;
+  more.textContent = `Show all ${items.length}`;
+  wall.hidden = false;
+}
 
 export function setupGive() {
   const g = SITE.giving || {};
@@ -12,6 +44,8 @@ export function setupGive() {
   const grid = $("[data-presets]"), custom = $("#gCustom"), btn = $("#giveSubmit"), msg = $("#giveMsg");
 
   $("[data-give-heading]").textContent = g.heading || "Send a birthday gift";
+  onRoom("give", { enter: () => loadGivers() });
+  $("#giversMore").addEventListener("click", (e) => { $("#giversList").classList.remove("is-clipped"); e.currentTarget.hidden = true; });
   $("[data-give-text]").textContent = g.text || "";
   $("[data-currency]").textContent = cur;
 
@@ -112,5 +146,6 @@ export function setupGive() {
         ? `Your gift of ${fmt(data.amount, data.currency || cur)} has been received.`
         : "Paystack has your payment. Confirmation is still on its way and will be recorded automatically." }),
       h("p", { class: "thanks__ref", text: `Reference: ${reference}` })));
+    if (ok) loadGivers(true);
   }
 }

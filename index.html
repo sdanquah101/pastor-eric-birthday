@@ -203,11 +203,21 @@
           <label for="gNote">Note to Pastor Eric (optional)</label>
           <input id="gNote" maxlength="200">
         </div>
-        <label class="check"><input type="checkbox" id="gAnon"> Keep my name private</label>
+        <label class="check"><input type="checkbox" id="gAnon"> Keep my name private <small>(you'll appear as “A friend”)</small></label>
         <button class="btn btn--black btn--full" type="submit" id="giveSubmit">Give GHS 200</button>
         <p class="formmsg" id="giveMsg" role="status"></p>
       </form>
     </div>
+
+    <!-- gift wall: names and notes from /api/givers; individual amounts are never shown -->
+    <section class="givers" id="givers" aria-labelledby="giversTitle" hidden>
+      <div class="givers__head">
+        <h3 id="giversTitle">Gifts from the family</h3>
+        <p class="givers__total" id="giversTotal" aria-live="polite"></p>
+      </div>
+      <ul class="givers__list" id="giversList"></ul>
+      <button type="button" class="btn btn--line givers__more" id="giversMore" hidden>Show all</button>
+    </section>
   </section>
 </main>
 
