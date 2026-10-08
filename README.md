@@ -49,7 +49,9 @@ scripts/dev.mjs            local preview server
    - `focus` — 0 to 1, which part to keep when a photo is cropped (0 = top, 0.3 = faces near the top, 0.5 = middle)
    - `album` — change or clear the album name
    - `hidden: true` to keep a photo out of the gallery (it can still be used in the opening or story)
-   - `share: true` on one photo to make it the WhatsApp preview image (then run `npm run photos` again)
+   - `share: true` on one photo to make it the WhatsApp preview image, and optionally `shareFocus`
+     (0 = top … 1 = bottom) to move the 1200×630 crop onto the face; then run `npm run photos` again
+     and bump `?v=` on `og:image` in `index.html` so WhatsApp refetches it
 5. Reorder by moving entries in the file, or run `npm run photos -- --sort=date` (date taken) or `--sort=name`.
 6. Commit `photos/web/`, `photos/share.jpg` and `content/photos.json`.
 

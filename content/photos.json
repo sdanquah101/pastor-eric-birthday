@@ -7,6 +7,7 @@
       "caption": "",
       "album": "",
       "focus": 0.2,
+      "shareFocus": 0.08,
       "share": true,
       "w": 1000,
       "h": 1500,

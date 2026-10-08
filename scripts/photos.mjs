@@ -158,14 +158,20 @@ async function main() {
     const src = (await exists(path.join(ORIGINALS, share.file))) ? path.join(ORIGINALS, share.file)
       : path.join(WEB, `${share.id}-${Math.max(...share.widths)}.webp`);
     if (await exists(src)) {
-      await sharp(src).rotate().resize(1200, 630, { fit: "cover", position: sharp.strategy.attention })
-        .jpeg({ quality: 82, mozjpeg: true }).toFile(path.join(ROOT, "photos/share.jpg"));
+      // 1200x630 band; shareFocus (else focus) picks how far down the photo it sits: 0 = top, 1 = bottom
+      const focus = share.shareFocus ?? share.focus ?? 0.3;
+      const scaled = await sharp(src).rotate().resize({ width: 1200, height: 630, fit: "outside" }).toBuffer({ resolveWithObject: true });
+      const { width: sw, height: sh } = scaled.info;
+      await sharp(scaled.data).extract({
+        left: Math.round((sw - 1200) / 2), top: Math.round(Math.min(1, Math.max(0, focus)) * (sh - 630)), width: 1200, height: 630,
+      }).jpeg({ quality: 82, mozjpeg: true }).toFile(path.join(ROOT, "photos/share.jpg"));
     }
   }
 
   const ordered = manifest.photos.map((p) => ({
     id: p.id, file: p.file, alt: p.alt ?? "", caption: p.caption ?? "", album: p.album ?? "",
-    focus: p.focus ?? 0.3, ...(p.hidden ? { hidden: true } : {}), ...(p.share ? { share: true } : {}),
+    focus: p.focus ?? 0.3, ...(p.shareFocus != null ? { shareFocus: p.shareFocus } : {}),
+    ...(p.hidden ? { hidden: true } : {}), ...(p.share ? { share: true } : {}),
     w: p.w, h: p.h, widths: p.widths, color: p.color, ...(p.taken ? { taken: p.taken } : {}), bytes: p.bytes,
   }));
   await fs.writeFile(MANIFEST, JSON.stringify({ photos: ordered }, null, 2) + "\n");
