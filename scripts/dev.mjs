@@ -24,6 +24,7 @@ http.createServer((req, res) => {
   let file = path.join(ROOT, path.normalize(url).replace(/^(\.\.[/\\])+/, ""));
   if (!file.startsWith(ROOT) || file.includes(`${path.sep}photos${path.sep}originals`)) { res.writeHead(403); return res.end(); }
   if (fs.existsSync(file) && fs.statSync(file).isDirectory()) file = path.join(file, "index.html");
+  else if (!path.extname(file) && fs.existsSync(file + ".html")) file += ".html"; // /admin -> admin.html, as on Vercel
   fs.readFile(file, (err, data) => {
     if (err) { res.writeHead(404); return res.end("Not found"); }
     res.writeHead(200, { "content-type": TYPES[path.extname(file).toLowerCase()] || "application/octet-stream", "cache-control": "no-store" });

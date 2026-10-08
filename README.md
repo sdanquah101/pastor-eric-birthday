@@ -22,7 +22,8 @@ assets/
   js/main.js               boots the page
   js/lib/                  dom helpers, kente generator, photo library
   js/rooms/                intro, home (stoles), nav (rooms + curtain), story, gallery, wishes, give
-api/                       Vercel functions: wishes, verify, paystack-webhook, config
+api/                       Vercel functions: wishes, verify, paystack-webhook, config, gifts (admin)
+admin.html                 organisers' page at /admin: who has given, totals, CSV
 db/schema.sql              run once in Neon
 scripts/photos.mjs         the photo pipeline
 scripts/dev.mjs            local preview server
@@ -90,12 +91,23 @@ For the full thing use `npx vercel dev` with a `.env` file (see `.env.example`).
    - `PAYSTACK_PUBLIC_KEY` — pk_test_… / pk_live_…
    - `PAYSTACK_SECRET_KEY` — sk_test_… / sk_live_…
    - `IP_SALT` — any random words (used to rate-limit wishes without storing IPs)
+   - `ADMIN_PASSWORD` — 8+ characters; opens the organisers' page at `/admin`
 4. Deploy. The live site is https://pastor-eric-birthday.vercel.app/. If it moves to another domain,
    update `og:url` and `og:image` in `index.html` so WhatsApp still shows the preview photo.
 
 ## 4. Fill in the words
 Open `content/site.js` and replace everything in `[square brackets]`.
 Set `birthDate` (and `birthdayThisYear`) to show his age and the date on the home page.
+
+## Seeing who has given: /admin
+Open https://pastor-eric-birthday.vercel.app/admin and enter `ADMIN_PASSWORD`. It shows every gift (name,
+amount, method, note, email, Paystack reference), the total received, and a CSV download.
+
+- **Sync from Paystack** pulls every successful birthday payment from Paystack and records any the site missed
+  (for example when a giver closed the page before it confirmed). Only payments made on this site are counted:
+  they carry the occasion "Birthday gift". Other payments on the same Paystack account are ignored.
+- Warnings at the top of the page say when a setting is missing in Vercel (e.g. `PAYSTACK_SECRET_KEY`).
+- "private" next to a name means the giver ticked "Keep my name private". The organisers still see it.
 
 ## Managing wishes and gifts (Neon SQL Editor)
 ```sql

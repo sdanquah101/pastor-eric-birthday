@@ -1,0 +1,68 @@
+/* ================= ORGANISERS' PAGE (admin.html) ================= */
+body.admin { background: var(--cream); }
+.adm-head {
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px;
+  padding: 10px var(--pad); background: var(--white); border-bottom: 1px solid var(--line);
+}
+.adm-head h1 { margin: 0; font-size: 20px; font-weight: 800; font-variation-settings: "opsz" 48, "wdth" 85; }
+.adm-back { color: var(--ink); font-weight: 600; font-size: 15px; text-decoration: none; }
+.adm-back::before { content: "‹ "; }
+.adm-signout { justify-self: end; border: 0; background: none; font-weight: 600; font-size: 15px; cursor: pointer; text-decoration: underline; text-underline-offset: 4px; min-height: 44px; }
+
+.adm { max-width: 1200px; margin: 0 auto; padding: clamp(20px, 4vw, 40px) var(--pad) 60px; }
+
+.adm-login {
+  display: grid; gap: 18px; max-width: 420px; margin: 6vh auto 0; padding: 28px;
+  background: var(--white); border-top: 6px solid var(--gold);
+}
+.adm-login h2 { margin: 0; font-size: 28px; font-weight: 800; font-variation-settings: "opsz" 96, "wdth" 82; }
+.adm-login p { margin: 0; color: var(--mute); }
+
+.adm-notices { display: grid; gap: 8px; margin-bottom: 18px; }
+.adm-notices:empty { display: none; }
+.adm-notice { margin: 0; padding: 12px 16px; background: #fff4e5; border-left: 4px solid #c26a00; font-size: 16px; }
+
+.adm-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-bottom: 22px; }
+.stat { display: grid; gap: 2px; padding: 16px 18px; background: var(--white); border-top: 4px solid var(--black); min-width: 0; }
+.stat:first-child { border-top-color: var(--gold); }
+.stat__label { font-size: 14px; font-weight: 600; color: var(--mute); }
+.stat__value { font-size: clamp(24px, 3vw, 34px); font-weight: 800; font-variation-settings: "opsz" 96, "wdth" 82; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.stat__hint { font-size: 13px; color: var(--mute); }
+
+.adm-actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 8px; }
+.adm-actions .btn { min-height: 44px; padding: 10px 18px; font-size: 15px; }
+.adm-search {
+  flex: 1 1 260px; min-width: 0; min-height: 44px; padding: 10px 14px; font-size: 16px;
+  border: 2px solid #d9d4c7; border-radius: 0; background: var(--white); outline: none;
+}
+.adm-search:focus { border-color: var(--blue); }
+#boardMsg { margin-bottom: 12px; }
+
+.adm-tablewrap { background: var(--white); overflow-x: auto; }
+.adm-table { width: 100%; border-collapse: collapse; font-size: 15px; }
+.adm-table th { text-align: left; font-size: 13px; font-weight: 700; color: var(--mute); padding: 12px 14px; border-bottom: 2px solid var(--black); white-space: nowrap; }
+.adm-table td { padding: 12px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.adm-table .num { text-align: right; }
+.adm-amount { font-weight: 800; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.adm-name { font-weight: 600; }
+.adm-note { max-width: 32ch; overflow-wrap: anywhere; }
+.adm-ref { font-size: 12px; color: var(--mute); overflow-wrap: anywhere; }
+.adm-table a { color: var(--blue); overflow-wrap: anywhere; }
+.badge { display: inline-block; margin-left: 6px; padding: 1px 7px; border-radius: 999px; background: var(--cream); border: 1px solid var(--line); font-size: 12px; font-weight: 600; color: var(--mute); vertical-align: 1px; }
+.adm-empty { margin: 0; padding: 40px 24px; text-align: center; background: var(--white); color: var(--mute); }
+
+/* phones: each gift becomes a card */
+@media (max-width: 759.98px) {
+  .adm-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stat:first-child { grid-column: 1 / -1; }
+  .adm-actions .btn { flex: 1 1 auto; }
+  .adm-tablewrap { background: none; overflow: visible; }
+  .adm-table thead { display: none; }
+  .adm-table, .adm-table tbody, .adm-table tr, .adm-table td { display: block; }
+  .adm-table tr { background: var(--white); margin-bottom: 10px; padding: 12px 14px; border-top: 4px solid var(--gold); }
+  .adm-table td { display: grid; grid-template-columns: 88px 1fr; gap: 10px; padding: 5px 0; border: 0; text-align: left; }
+  .adm-table td::before { content: attr(data-label); font-size: 13px; font-weight: 600; color: var(--mute); }
+  .adm-table td:empty { display: none; }
+  .adm-table .num { text-align: left; }
+  .adm-amount { font-size: 18px; }
+}

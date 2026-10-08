@@ -53,3 +53,29 @@ export async function recordGift(tx) {
     on conflict (reference) do nothing`;
 }
 function safeParse(s) { try { return JSON.parse(s); } catch { return {}; } }
+
+/** Call the Paystack API with the secret key. Throws a readable error if the key is missing or rejected. */
+export async function paystack(path) {
+  const key = process.env.PAYSTACK_SECRET_KEY;
+  if (!key) throw new ConfigError("PAYSTACK_SECRET_KEY is not set in Vercel.");
+  const r = await fetch(`https://api.paystack.co${path}`, { headers: { authorization: `Bearer ${key}` } });
+  const body = await r.json().catch(() => ({}));
+  if (r.status === 401) throw new ConfigError("Paystack rejected PAYSTACK_SECRET_KEY. Check it in Vercel (and that it is the live key if the site uses a live public key).");
+  return { ok: r.ok, status: r.status, body };
+}
+export class ConfigError extends Error {}
+
+/** Gifts made on this site carry occasion "Birthday gift" (see assets/js/rooms/give.js). */
+export function isBirthdayGift(tx) {
+  const m = typeof tx.metadata === "string" ? safeParse(tx.metadata) : tx.metadata || {};
+  return (m.custom_fields || []).some((f) => f?.variable_name === "occasion" && f?.value === "Birthday gift");
+}
+
+/** For the admin page: the password in ADMIN_PASSWORD, sent as "Authorization: Bearer …". */
+export function isAdmin(req) {
+  const want = process.env.ADMIN_PASSWORD || "";
+  if (want.length < 8) return false;
+  const got = String(req.headers.authorization || "").replace(/^Bearer\s+/i, "");
+  const h = (s) => crypto.createHash("sha256").update(s).digest();
+  return crypto.timingSafeEqual(h(got), h(want));
+}
