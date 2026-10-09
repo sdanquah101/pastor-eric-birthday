@@ -201,7 +201,7 @@
       <div class="give__text">
         <h2 id="giveTitle" data-give-heading>Send a birthday gift</h2>
         <p data-give-text></p>
-        <p class="give__secure">Payments are processed by Paystack. Your card and wallet details never touch this site.</p>
+        <p class="give__secure">Payments are processed by <span data-provider-name>Paystack</span>. Your card and wallet details never touch this site.</p>
       </div>
       <form class="giveform" id="giveForm" novalidate>
         <fieldset class="amounts">
@@ -217,7 +217,7 @@
           <input id="gName" maxlength="60" autocomplete="name" required>
         </div>
         <div class="field">
-          <label for="gEmail">Email for your receipt</label>
+          <label for="gEmail">Email for your receipt<span data-email-optional hidden> (optional)</span></label>
           <input id="gEmail" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required>
         </div>
         <div class="field field--wide">

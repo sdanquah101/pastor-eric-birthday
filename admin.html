@@ -45,10 +45,17 @@
 
     <div class="adm-actions">
       <input class="adm-search" id="search" type="search" placeholder="Search name, note, email, reference" aria-label="Search gifts">
-      <button type="button" class="btn btn--line" id="sync">Sync from Paystack</button>
+      <button type="button" class="btn btn--line" id="sync">Sync payments</button>
       <button type="button" class="btn btn--line" id="csv">Download CSV</button>
     </div>
+    <p class="adm-provider" id="provider"></p>
     <p class="formmsg" id="boardMsg" role="status"></p>
+
+    <section class="adm-pending" id="pendingBox" hidden aria-labelledby="pendingTitle">
+      <h2 id="pendingTitle">Waiting for confirmation <span class="badge" id="pendingCount"></span></h2>
+      <p>These givers started paying with Hubtel, but Hubtel hasn't confirmed the payment yet. Find each reference in your Hubtel dashboard, then mark it as paid or not paid. Most confirm on their own within a minute.</p>
+      <ul class="adm-pendlist" id="pendingRows"></ul>
+    </section>
 
     <div class="adm-tablewrap">
       <table class="adm-table">
@@ -58,7 +65,7 @@
         <tbody id="rows"></tbody>
       </table>
     </div>
-    <p class="adm-empty" id="empty" hidden>No gifts recorded yet. If you know payments have come in, press <b>Sync from Paystack</b>.</p>
+    <p class="adm-empty" id="empty" hidden>No gifts recorded yet. If you know payments have come in, press <b>Sync payments</b>.</p>
   </section>
 </main>
 </body>

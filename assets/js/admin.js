@@ -11,6 +11,7 @@ const store = {
 };
 let password = store.get();
 let gifts = [];
+let pending = [];
 
 const money = (minor, cur) =>
   `${cur} ${(minor / 100).toLocaleString("en-GH", { minimumFractionDigits: minor % 100 ? 2 : 0, maximumFractionDigits: 2 })}`;
@@ -37,9 +38,11 @@ async function load() {
   try {
     const data = await call("GET");
     gifts = data.gifts || [];
+    pending = data.pending || [];
     $("#login").hidden = true; $("#board").hidden = false; $("#signOut").hidden = false;
     renderStats(data.wishes);
     renderRows();
+    renderPending();
   } catch (e) {
     if (e.status === 401) { store.set(""); password = ""; return showLogin(e.message); }
     showLogin(e.message);
@@ -77,20 +80,49 @@ function renderRows() {
   $(".adm-tablewrap").hidden = list.length === 0;
 }
 
+/* Hubtel gifts the giver started but Hubtel hasn't confirmed yet. Check them in the
+   Hubtel dashboard (by reference), then mark each as paid or not paid. */
+function renderPending() {
+  const box = $("#pendingBox");
+  box.hidden = pending.length === 0;
+  $("#pendingCount").textContent = String(pending.length);
+  $("#pendingRows").replaceChildren(...pending.map((p) => h("li", { class: "pend" },
+    h("div", { class: "pend__who" },
+      h("b", { text: p.name || "(no name)" }), p.anonymous ? h("span", { class: "badge", text: "private" }) : null,
+      h("span", { class: "pend__amt", text: money(p.amount_minor, p.currency) })),
+    h("div", { class: "pend__meta", text: `${when(p.created_at)} · ${p.reference}${p.detail ? " · " + p.detail : ""}` }),
+    p.note ? h("q", { class: "pend__note", text: p.note }) : null,
+    h("div", { class: "pend__actions" },
+      h("button", { type: "button", class: "btn btn--black", text: "Mark as paid", onclick: (e) => decide(p, "confirm", e.currentTarget) }),
+      h("button", { type: "button", class: "btn btn--line", text: "Not paid", onclick: (e) => decide(p, "dismiss", e.currentTarget) })),
+  )));
+}
+
+async function decide(p, action, btn) {
+  const sure = action === "confirm"
+    ? `Mark ${money(p.amount_minor, p.currency)} from ${p.name || "this giver"} as paid?\n\nOnly do this after finding reference ${p.reference} as paid in your Hubtel dashboard.`
+    : `Remove this pending gift from ${p.name || "this giver"}? Do this when Hubtel shows it was not paid.`;
+  if (!confirm(sure)) return;
+  btn.disabled = true;
+  try { await call("POST", { action, reference: p.reference }); await load(); }
+  catch (e) { $("#boardMsg").textContent = e.message; $("#boardMsg").classList.add("is-error"); btn.disabled = false; }
+}
+
 async function sync() {
   const btn = $("#sync"), msg = $("#boardMsg");
   btn.disabled = true; btn.textContent = "Syncing…"; msg.classList.remove("is-error");
-  msg.textContent = "Checking Paystack for birthday payments…";
+  msg.textContent = "Checking for payments the site may have missed…";
   try {
     const r = await call("POST", { action: "sync" });
-    msg.textContent = r.added
-      ? `Added ${r.added} gift${r.added === 1 ? "" : "s"} from Paystack.`
-      : `Up to date. Paystack has ${r.birthdayGifts} birthday payment${r.birthdayGifts === 1 ? "" : "s"}, all recorded.`;
+    const parts = [r.added ? `Added ${r.added} gift${r.added === 1 ? "" : "s"}.` : "Up to date: no missing gifts found."];
+    if (r.hubtelPending) parts.push(`${r.hubtelPending} Hubtel gift${r.hubtelPending === 1 ? " is" : "s are"} still waiting for confirmation.`);
+    parts.push(...(r.notes || []));
+    msg.textContent = parts.join(" ");
     await load();
   } catch (e) {
     msg.textContent = e.message; msg.classList.add("is-error");
   } finally {
-    btn.disabled = false; btn.textContent = "Sync from Paystack";
+    btn.disabled = false; btn.textContent = "Sync payments";
   }
 }
 
@@ -109,14 +141,18 @@ function downloadCsv() {
 
 async function notices() {
   try {
-    const { status: s } = await (await fetch(API + "/config")).json();
+    const { status: s, provider: prov } = await (await fetch(API + "/config")).json();
     if (!s) return;
     const problems = [];
     if (!s.adminPassword) problems.push("ADMIN_PASSWORD is not set in Vercel (8 or more characters), so this page cannot open.");
     if (!s.database) problems.push("DATABASE_URL is not set in Vercel, so wishes and gifts cannot be saved.");
-    if (s.paystackSecretKey === "missing") problems.push("PAYSTACK_SECRET_KEY is not set in Vercel, so gifts cannot be confirmed or recorded.");
-    if (s.paystackSecretKey === "unrecognised") problems.push("PAYSTACK_SECRET_KEY in Vercel does not look like a Paystack secret key (sk_live_… or sk_test_…).");
-    if (s.paystackSecretKey === "test") problems.push("PAYSTACK_SECRET_KEY is a test key, but the site takes live payments. Use the sk_live_… key.");
+    if (s.hubtelRequested && !s.hubtelKeys) problems.push("PAYMENT_PROVIDER is set to hubtel, but HUBTEL_API_ID, HUBTEL_API_KEY or HUBTEL_MERCHANT_ACCOUNT is missing in Vercel, so the site is still using Paystack.");
+    if (prov === "paystack") {
+      if (s.paystackSecretKey === "missing") problems.push("PAYSTACK_SECRET_KEY is not set in Vercel, so gifts cannot be confirmed or recorded.");
+      if (s.paystackSecretKey === "unrecognised") problems.push("PAYSTACK_SECRET_KEY in Vercel does not look like a Paystack secret key (sk_live_… or sk_test_…).");
+      if (s.paystackSecretKey === "test") problems.push("PAYSTACK_SECRET_KEY is a test key, but the site takes live payments. Use the sk_live_… key.");
+    }
+    $("#provider").textContent = prov === "hubtel" ? "Gifts are being taken through Hubtel." : "Gifts are being taken through Paystack.";
     $("#notices").replaceChildren(...problems.map((p) => h("p", { class: "adm-notice", role: "alert", text: p })));
   } catch {}
 }

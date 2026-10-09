@@ -30,3 +30,22 @@ create table if not exists gifts (
 -- Hide a wish:          update wishes set hidden = true where id = 123;
 -- Total given:          select currency, sum(amount_minor)/100.0 as total, count(*) from gifts group by currency;
 -- Gifts with notes:     select name, amount_minor/100.0 as amount, note, paid_at from gifts order by paid_at desc;
+
+-- Hubtel: a gift is saved here when the giver starts paying, and moved into
+-- gifts once Hubtel confirms it (callback, status check or "Mark as paid" on /admin).
+create table if not exists pending_gifts (
+  reference     text primary key,            -- our clientReference (max 32 chars)
+  checkout_id   text,
+  amount_minor  integer not null,
+  currency      text not null default 'GHS',
+  email         text,
+  name          text,
+  note          text,
+  anonymous     boolean not null default false,
+  provider      text not null default 'hubtel',
+  status        text not null default 'pending', -- pending | paid | failed
+  detail        text,                         -- last message from Hubtel
+  created_at    timestamptz not null default now(),
+  updated_at    timestamptz not null default now()
+);
+create index if not exists pending_gifts_status_idx on pending_gifts (status, created_at desc);

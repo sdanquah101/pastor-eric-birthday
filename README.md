@@ -22,7 +22,8 @@ assets/
   js/main.js               boots the page
   js/lib/                  dom helpers, kente generator, photo library
   js/rooms/                intro, home (stoles), nav (rooms + curtain), story, gallery, wishes, give (form), gifts (gift cloth)
-api/                       Vercel functions: wishes, verify, paystack-webhook, config, givers (gift wall), gifts (admin)
+api/                       Vercel functions: wishes, verify, paystack-webhook, config, givers (gift wall), gifts (admin),
+                           hubtel-initiate, hubtel-callback, gift-status (+ _hubtel.js helpers)
 admin.html                 organisers' page at /admin: who has given, totals, CSV
 db/schema.sql              run once in Neon
 scripts/photos.mjs         the photo pipeline
@@ -84,6 +85,23 @@ For the full thing use `npx vercel dev` with a `.env` file (see `.env.example`).
    (whose webhook is `https://phaneteers.com/api/paystack/webhook`), use a separate Paystack account or
    subaccount for the birthday, or gifts are still confirmed by `/api/verify` when the giver keeps the page open.
 3. Make sure the account is enabled for **GHS** (mobile money and card).
+
+## 2b. Hubtel instead of Paystack (optional)
+The Give form can take gifts through Hubtel's Online Checkout instead. Paystack stays in place until you switch.
+
+1. From Hubtel get your **API ID**, **API Key** and **Collection (merchant) account number**.
+2. In Hubtel, set nothing else: the site sends Hubtel its callback URL
+   (`https://pastor-eric-birthday.vercel.app/api/hubtel-callback`) with every payment.
+3. In Vercel add `HUBTEL_API_ID`, `HUBTEL_API_KEY`, `HUBTEL_MERCHANT_ACCOUNT`, and `PAYMENT_PROVIDER=hubtel`; redeploy.
+   To go back to Paystack, remove `PAYMENT_PROVIDER` (or set it to `paystack`) and redeploy.
+
+How it works: the giver's name, note and amount are saved as a *pending* gift, they pay on Hubtel's page, and Hubtel
+calls `/api/hubtel-callback`. The callback is not signed by Hubtel, so the site only accepts it from Hubtel's IP
+(108.129.40.25, override with `HUBTEL_CALLBACK_IPS`), for a reference it created itself, paying at least the
+pledged amount. Hubtel's status-check API only answers whitelisted server IPs, which Vercel doesn't have, so a
+payment whose callback never arrives shows on `/admin` under **Waiting for confirmation**: find the reference in
+your Hubtel dashboard and press **Mark as paid** (or **Not paid**). Run `db/schema.sql` again on an older database
+to add the `pending_gifts` table.
 
 ## 3. Deploy (Vercel)
 1. vercel.com/new → import this repo.
