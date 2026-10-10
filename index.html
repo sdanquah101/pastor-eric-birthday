@@ -201,7 +201,20 @@
       <div class="give__text">
         <h2 id="giveTitle" data-give-heading>Send a birthday gift</h2>
         <p data-give-text></p>
-        <p class="give__secure">Payments are processed by <span data-provider-name>Paystack</span>. Your card and wallet details never touch this site.</p>
+        <p class="give__secure" id="giveSecure">Payments are processed by <span data-provider-name>Paystack</span>. Your card and wallet details never touch this site.</p>
+
+        <!-- direct MoMo (SITE.giving.momo): shown instead of a payment provider -->
+        <div class="momo" id="momoCard" hidden>
+          <p class="momo__step"><b>1</b> Send MoMo to</p>
+          <p class="momo__number"><span id="momoNumber"></span></p>
+          <p class="momo__name"><span id="momoName"></span> · <span id="momoNet"></span></p>
+          <div class="momo__actions">
+            <button type="button" class="btn btn--gold" id="momoCopy">Copy number</button>
+            <a class="btn btn--line" id="momoDial" href="tel:*170%23">Dial *170#</a>
+          </div>
+          <p class="momo__how">MTN: dial *170# → Transfer Money → MoMo User. From Telecel Cash or AirtelTigo Money, send to MTN from your own menu. Check that the name shows <b data-momo-name></b> before you confirm.</p>
+          <p class="momo__step"><b>2</b> Then fill in the form so your gift appears on his cloth.</p>
+        </div>
       </div>
       <form class="giveform" id="giveForm" novalidate>
         <fieldset class="amounts">
@@ -216,7 +229,11 @@
           <label for="gName">Your name</label>
           <input id="gName" maxlength="60" autocomplete="name" required>
         </div>
-        <div class="field">
+        <div class="field" id="phoneField" hidden>
+          <label for="gPhone">MoMo number you sent from (optional)</label>
+          <input id="gPhone" type="tel" inputmode="tel" autocomplete="tel" maxlength="16" placeholder="024 000 0000">
+        </div>
+        <div class="field" id="emailField">
           <label for="gEmail">Email for your receipt<span data-email-optional hidden> (optional)</span></label>
           <input id="gEmail" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required>
         </div>
@@ -224,6 +241,7 @@
           <label for="gNote">Note to Pastor Eric (optional)</label>
           <input id="gNote" maxlength="200">
         </div>
+        <input class="hp" id="gWebsite" tabindex="-1" autocomplete="off" aria-hidden="true">
         <label class="check"><input type="checkbox" id="gAnon"> Keep my name private <small>(you'll appear as “A friend”)</small></label>
         <button class="btn btn--black btn--full" type="submit" id="giveSubmit">Give GHS 200</button>
         <p class="formmsg" id="giveMsg" role="status"></p>

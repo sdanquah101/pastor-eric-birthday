@@ -3,6 +3,7 @@
    kept only for this browser tab (sessionStorage). */
 import { $, $$, h, API } from "./lib/dom.js";
 import { weaveCloth } from "./lib/kente.js";
+import SITE from "../../content/site.js";
 
 const KEY = "hbd-admin";
 const store = {
@@ -16,7 +17,7 @@ let pending = [];
 const money = (minor, cur) =>
   `${cur} ${(minor / 100).toLocaleString("en-GH", { minimumFractionDigits: minor % 100 ? 2 : 0, maximumFractionDigits: 2 })}`;
 const when = (iso) => iso ? new Date(iso).toLocaleString("en-GB", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit", timeZone: "Africa/Accra" }) : "";
-const METHOD = { card: "Card", mobile_money: "Mobile money", bank: "Bank", bank_transfer: "Bank transfer", ussd: "USSD", qr: "QR", apple_pay: "Apple Pay" };
+const METHOD = { momo_direct: "MoMo direct (self-reported)", card: "Card", mobile_money: "Mobile money", bank: "Bank", bank_transfer: "Bank transfer", ussd: "USSD", qr: "QR", apple_pay: "Apple Pay" };
 
 async function call(method, body) {
   const r = await fetch(API + "/gifts", {
@@ -52,7 +53,7 @@ async function load() {
 function renderStats(wishCount) {
   const totals = new Map();
   for (const g of gifts) totals.set(g.currency, (totals.get(g.currency) || 0) + g.amount_minor);
-  const givers = new Set(gifts.map((g) => (g.email || g.name || g.reference).toLowerCase())).size;
+  const givers = new Set(gifts.map((g) => (g.email || g.phone || g.name || g.reference).toLowerCase())).size;
   const tile = (label, value, hint) => h("div", { class: "stat" }, h("span", { class: "stat__label", text: label }), h("b", { class: "stat__value", text: value }), hint ? h("span", { class: "stat__hint", text: hint }) : null);
   const amount = totals.size ? [...totals].map(([c, m]) => money(m, c)).join(" + ") : "GHS 0";
   $("#stats").replaceChildren(
@@ -73,8 +74,9 @@ function renderRows() {
     h("td", { "data-label": "Amount", class: "num adm-amount", text: money(g.amount_minor, g.currency) }),
     h("td", { "data-label": "Method", text: METHOD[g.channel] || g.channel || "" }),
     h("td", { "data-label": "Note", class: "adm-note", text: g.note || "" }),
-    h("td", { "data-label": "Email" }, g.email ? h("a", { href: `mailto:${g.email}`, text: g.email }) : ""),
-    h("td", { "data-label": "Reference", class: "adm-ref", text: g.reference }),
+    h("td", { "data-label": "Contact" }, g.email ? h("a", { href: `mailto:${g.email}`, text: g.email }) : g.phone ? h("a", { href: `tel:${g.phone}`, text: g.phone }) : ""),
+    h("td", { "data-label": "Reference", class: "adm-ref" }, g.reference,
+      g.channel === "momo_direct" ? h("button", { type: "button", class: "adm-remove", text: "Remove", title: "Remove this self-reported gift if the money never arrived", onclick: (e) => removeGift(g, e.currentTarget) }) : null),
   )));
   $("#empty").hidden = gifts.length > 0;
   $(".adm-tablewrap").hidden = list.length === 0;
@@ -108,6 +110,14 @@ async function decide(p, action, btn) {
   catch (e) { $("#boardMsg").textContent = e.message; $("#boardMsg").classList.add("is-error"); btn.disabled = false; }
 }
 
+// direct-MoMo gifts are self-reported; remove one if it never reached his MoMo
+async function removeGift(g, btn) {
+  if (!confirm(`Remove ${money(g.amount_minor, g.currency)} from ${g.name || "this giver"}?\n\nDo this only if the money never reached Pastor Eric's MoMo. It disappears from the cloth and totals.`)) return;
+  btn.disabled = true;
+  try { await call("POST", { action: "remove", reference: g.reference }); await load(); }
+  catch (e) { $("#boardMsg").textContent = e.message; $("#boardMsg").classList.add("is-error"); btn.disabled = false; }
+}
+
 async function sync() {
   const btn = $("#sync"), msg = $("#boardMsg");
   btn.disabled = true; btn.textContent = "Syncing…"; msg.classList.remove("is-error");
@@ -132,8 +142,8 @@ function downloadCsv() {
     if (/^[=+\-@]/.test(s)) s = "'" + s; // stop spreadsheets treating text as a formula
     return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
   };
-  const head = ["Date (Accra)", "Name", "Keep private", "Amount", "Currency", "Method", "Note", "Email", "Reference"];
-  const lines = gifts.map((g) => [when(g.paid_at), g.name, g.anonymous ? "yes" : "no", (g.amount_minor / 100).toFixed(2), g.currency, METHOD[g.channel] || g.channel, g.note, g.email, g.reference].map(cell).join(","));
+  const head = ["Date (Accra)", "Name", "Keep private", "Amount", "Currency", "Method", "Note", "Email", "Phone", "Reference"];
+  const lines = gifts.map((g) => [when(g.paid_at), g.name, g.anonymous ? "yes" : "no", (g.amount_minor / 100).toFixed(2), g.currency, METHOD[g.channel] || g.channel, g.note, g.email, g.phone, g.reference].map(cell).join(","));
   const blob = new Blob(["﻿" + [head.join(","), ...lines].join("\r\n")], { type: "text/csv;charset=utf-8" });
   const a = h("a", { href: URL.createObjectURL(blob), download: `pastor-eric-birthday-gifts-${new Date().toISOString().slice(0, 10)}.csv` });
   document.body.append(a); a.click(); a.remove();
@@ -147,12 +157,14 @@ async function notices() {
     if (!s.adminPassword) problems.push("ADMIN_PASSWORD is not set in Vercel (8 or more characters), so this page cannot open.");
     if (!s.database) problems.push("DATABASE_URL is not set in Vercel, so wishes and gifts cannot be saved.");
     if (s.hubtelRequested && !s.hubtelKeys) problems.push("PAYMENT_PROVIDER is set to hubtel, but HUBTEL_API_ID, HUBTEL_API_KEY or HUBTEL_MERCHANT_ACCOUNT is missing in Vercel, so the site is still using Paystack.");
-    if (prov === "paystack") {
+    if (prov === "paystack" && !SITE.giving?.momo?.number) {
       if (s.paystackSecretKey === "missing") problems.push("PAYSTACK_SECRET_KEY is not set in Vercel, so gifts cannot be confirmed or recorded.");
       if (s.paystackSecretKey === "unrecognised") problems.push("PAYSTACK_SECRET_KEY in Vercel does not look like a Paystack secret key (sk_live_… or sk_test_…).");
       if (s.paystackSecretKey === "test") problems.push("PAYSTACK_SECRET_KEY is a test key, but the site takes live payments. Use the sk_live_… key.");
     }
-    $("#provider").textContent = prov === "hubtel" ? "Gifts are being taken through Hubtel." : "Gifts are being taken through Paystack.";
+    $("#provider").textContent = SITE.giving?.momo?.number
+      ? `Gifts are sent by MoMo straight to ${SITE.giving.momo.number} (${SITE.giving.momo.name}). These are self-reported: remove any that never arrived.`
+      : prov === "hubtel" ? "Gifts are being taken through Hubtel." : "Gifts are being taken through Paystack.";
     $("#notices").replaceChildren(...problems.map((p) => h("p", { class: "adm-notice", role: "alert", text: p })));
   } catch {}
 }

@@ -49,3 +49,7 @@ create table if not exists pending_gifts (
   updated_at    timestamptz not null default now()
 );
 create index if not exists pending_gifts_status_idx on pending_gifts (status, created_at desc);
+
+-- Direct MoMo gifts (self-reported): the sender's number and a hashed IP for rate limiting.
+alter table gifts add column if not exists phone text;
+alter table gifts add column if not exists ip_hash text;

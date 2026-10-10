@@ -116,7 +116,8 @@ export function setupGifts() {
   }));
   $("#giftsCta").addEventListener("click", (e) => {
     e.preventDefault();
-    $("#giveForm").scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
+    const target = $("#momoCard:not([hidden])") || $("#giveForm");
+    target.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
     setTimeout(() => $(".amt[aria-pressed='true']")?.focus({ preventScroll: true }), reduced ? 0 : 500);
   });
   onRoom("give", { enter: () => loadGifts(), leave: () => clearInterval(state.timer) });

@@ -37,7 +37,7 @@
 
 /* ---------- the gift cloth (top of the Give room) ---------- */
 .check small { font-size: 14px; color: var(--mute); }
-.giveform { scroll-margin-top: 76px; }
+.giveform, .momo { scroll-margin-top: 76px; }
 .gifts {
   position: relative; color: var(--white); background: var(--dark);
   padding: clamp(28px, 5vw, 64px) var(--pad) clamp(28px, 4vw, 48px);
@@ -118,3 +118,19 @@
   .gifts__cloth { gap: 12px 3px; }
   .gifts__cta { width: 100%; }
 }
+
+/* direct MoMo card (SITE.giving.momo) */
+.momo { margin-top: 18px; padding: 20px 20px 18px; background: var(--white); border-top: 6px solid var(--gold); max-width: 460px; }
+.momo__step { margin: 0; font-weight: 700; font-size: 16px; display: flex; gap: 10px; align-items: center; }
+.momo__step b { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--black); color: var(--white); font-size: 14px; flex: 0 0 auto; }
+.momo__number {
+  margin: 8px 0 0; font-weight: 800; font-variation-settings: "opsz" 96, "wdth" 82; letter-spacing: .02em;
+  font-size: clamp(34px, 5vw, 46px); line-height: 1; color: var(--black); font-variant-numeric: tabular-nums;
+}
+.momo__name { margin: 6px 0 14px; font-weight: 600; color: var(--ink); }
+.momo__actions { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+.momo__actions .btn { min-height: 44px; padding: 10px 18px; font-size: 15px; }
+.momo__how { margin: 0 0 16px; font-size: 15px; line-height: 1.5; color: var(--mute); }
+.momo__how b { color: var(--ink); }
+.momo .momo__step + .momo__step, .momo__how + .momo__step { margin-top: 2px; }
+@media (max-width: 520px) { .momo { margin-left: calc(var(--pad) * -1); margin-right: calc(var(--pad) * -1); } .momo__actions .btn { flex: 1 1 auto; } }

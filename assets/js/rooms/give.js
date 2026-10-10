@@ -2,6 +2,8 @@
    Two payment providers, chosen in Vercel (PAYMENT_PROVIDER, see /api/config):
    - Paystack: its popup takes the payment; /api/verify confirms it and
      /api/paystack-webhook records it even if the giver closes the tab.
+   - Direct MoMo (SITE.giving.momo, overrides both): we show his number, the giver
+     sends money themselves, then /api/momo-gift puts their gift on the cloth.
    - Hubtel: /api/hubtel-initiate saves the gift as pending and returns Hubtel's
      checkout page; the giver pays there and comes back to /?gift=REF#give, where
      we wait for /api/gift-status to report the callback from Hubtel.
@@ -23,7 +25,11 @@ export function setupGive() {
   $("[data-give-text]").textContent = g.text || "";
   $("[data-currency]").textContent = cur;
 
-  const label = () => (btn.textContent = amount > 0 ? `Give ${fmt(amount, cur)}` : "Choose an amount");
+  const momo = g.momo?.number ? g.momo : null;
+  const label = () => (btn.textContent = momo
+    ? (amount > 0 ? `I've sent ${fmt(amount, cur)}` : "Choose the amount you sent")
+    : (amount > 0 ? `Give ${fmt(amount, cur)}` : "Choose an amount"));
+  if (momo) setupMomo(momo);
   (g.presets || []).forEach((v) => {
     const b = h("button", { type: "button", class: "amt", "aria-pressed": String(v === amount), "aria-label": fmt(v, cur), text: Number(v).toLocaleString() });
     b.addEventListener("click", () => {
@@ -76,6 +82,7 @@ export function setupGive() {
     const err = (t, el) => { msg.textContent = t; msg.classList.add("is-error"); el?.focus(); };
     if (!(amount >= 1)) return err(`Enter an amount of at least ${cur} 1.`, custom);
     if (name.length < 2) return err("Add your name.", $("#gName"));
+    if (momo) return submitMomo({ amount, name, note, anonymous, phone: $("#gPhone").value.trim(), website: $("#gWebsite").value }, err);
     await ready;
     if (provider === "hubtel") {
       if (email && !/^\S+@\S+\.\S+$/.test(email)) return err("That email doesn't look right. Fix it or leave it empty.", $("#gEmail"));
@@ -112,6 +119,52 @@ export function setupGive() {
       btn.disabled = false;
     }
   });
+
+  function setupMomo(m) {
+    const pretty = m.number.replace(/^(\d{3})(\d{3})(\d{4})$/, "$1 $2 $3");
+    $("#momoNumber").textContent = pretty;
+    $("#momoName").textContent = m.name || "";
+    $("#momoNet").textContent = m.network || "Mobile Money";
+    $$("[data-momo-name]").forEach((el) => (el.textContent = m.name || "his name"));
+    $("#momoCard").hidden = false;
+    $("#giveSecure").hidden = true;
+    $("#emailField").hidden = true;
+    $("#gEmail").required = false;
+    $("#phoneField").hidden = false;
+    $(".amounts legend").firstChild.textContent = "Amount you sent in ";
+    const copy = $("#momoCopy");
+    copy.addEventListener("click", async () => {
+      try { await navigator.clipboard.writeText(m.number); }
+      catch { const t = h("textarea", { style: { position: "fixed", opacity: "0" } }); t.value = m.number; document.body.append(t); t.select(); document.execCommand?.("copy"); t.remove(); }
+      copy.textContent = "Copied ✓";
+      setTimeout(() => (copy.textContent = "Copy number"), 2000);
+    });
+    // USSD links only work on Android phones
+    if (!/Android/i.test(navigator.userAgent)) $("#momoDial").hidden = true;
+  }
+
+  async function submitMomo(gift, err) {
+    btn.disabled = true;
+    msg.textContent = "Adding your gift to his cloth…";
+    try {
+      const r = await fetch(API + "/momo-gift", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(gift) });
+      const data = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(data.error || "Your gift wasn't added. Check your connection and try again.");
+      const form = $("#giveForm");
+      const box = h("div", { class: "thanks", role: "status" },
+        h("h3", { text: `Thank you, ${gift.name.split(" ")[0]}.` }),
+        h("p", { text: `Your gift of ${fmt(data.amount, data.currency || cur)} is now part of his birthday cloth.` }));
+      form.replaceChildren(box);
+      await loadGifts({ fresh: true, celebrate: true });
+      if (!$("#gifts").hidden) box.append(h("button", {
+        type: "button", class: "btn btn--line thanks__see", text: "See your strip on his cloth",
+        onclick: () => $("#gifts").scrollIntoView({ behavior: "smooth", block: "start" }),
+      }));
+    } catch (ex) {
+      err(ex.message);
+      btn.disabled = false;
+    }
+  }
 
   async function startHubtel(gift, err) {
     btn.disabled = true;

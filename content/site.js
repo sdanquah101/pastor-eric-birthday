@@ -65,7 +65,11 @@ export default {
 
   giving: {
     heading: "Send a birthday gift",
-    text: "Send Ps. Eric a birthday blessing from the PHANET family. Gifts are received securely through Paystack by mobile money or card.",
+    text: "Send Ps. Eric a birthday blessing from the PHANET family, straight to his MoMo.",
+    // Direct MoMo: when set, the Give page shows this number instead of a payment provider.
+    // Givers send money themselves, then tell the site so their gift appears on his cloth.
+    // Remove (or empty `number`) to go back to Paystack/Hubtel.
+    momo: { number: "0242631352", name: "Eric Obeng Kwakye", network: "MTN MoMo" },
     currency: "GHS",
     presets: [50, 100, 200, 500, 1000],
     defaultAmount: 200,

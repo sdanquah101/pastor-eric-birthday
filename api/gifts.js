@@ -3,6 +3,7 @@
 //   re-check pending Hubtel gifts with Hubtel's status API (works only from whitelisted IPs).
 // POST { action: "confirm", reference }: mark a pending Hubtel gift as paid after checking the Hubtel dashboard.
 // POST { action: "dismiss", reference }: mark a pending gift as not paid (hides it from the list).
+// POST { action: "remove", reference }: delete a self-reported direct-MoMo gift that turned out to be fake.
 import { db, send, readJson, recordGift, paystack, isBirthdayGift, isAdmin, ConfigError } from "./_lib.js";
 import { hubtelReady, recheck, markPaid, markFailed } from "./_hubtel.js";
 
@@ -22,13 +23,18 @@ export default async function handler(req, res) {
         const r = await markPaid(reference, { detail: "marked paid on /admin" });
         return r.ok ? send(res, 200, { ok: true }) : send(res, 400, { error: r.reason });
       }
+      if (action === "remove") {
+        if (!/^MOMO[0-9a-f]{24}$/.test(String(reference || ""))) return send(res, 400, { error: "Only direct MoMo gifts can be removed." });
+        const gone = await db()`delete from gifts where reference = ${reference} and channel = 'momo_direct' returning reference`;
+        return gone.length ? send(res, 200, { ok: true }) : send(res, 404, { error: "Gift not found." });
+      }
       return send(res, 400, { error: "Unknown action." });
     }
     if (req.method !== "GET") return send(res, 405, { error: "Method not allowed" });
 
     const sql = db();
     const gifts = await sql`
-      select reference, amount_minor, currency, name, email, note, anonymous, channel, paid_at
+      select reference, amount_minor, currency, name, email, phone, note, anonymous, channel, paid_at
       from gifts order by paid_at desc nulls last, id desc`;
     const wishes = await sql`select count(*)::int as n from wishes where hidden = false`;
     const pending = await sql`
